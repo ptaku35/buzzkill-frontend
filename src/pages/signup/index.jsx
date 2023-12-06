@@ -30,7 +30,7 @@ function SignUp() {
         message,
         signature,
         redirect: false,
-        callbackUrl: "/oems/account",
+        callbackUrl: "/play",
       });
       /**
        * instead of using signIn(..., redirect: "/user")

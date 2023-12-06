@@ -50,7 +50,7 @@ export default function Header() {
         message,
         signature,
         redirect: false,
-        callbackUrl: "/oems", // take the user to the oem dashboard
+        callbackUrl: "/play", // take the user to the oem dashboard
       })) as { url: string };
       /**
        * instead of using signIn(..., redirect: "/user")

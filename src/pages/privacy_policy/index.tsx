@@ -84,7 +84,7 @@ const privacy_policy: NextPage = () => {
             </ListItem>
             <ListItem>
               Company (referred to as either "the Company", "We", "Us" or "Our"
-              in this Agreement) refers to Yamato Finance.
+              in this Agreement) refers to Earendel Labs Finance.
             </ListItem>
             <ListItem>
               Cookies are small files that are placed on Your computer, mobile
@@ -115,8 +115,8 @@ const privacy_policy: NextPage = () => {
               infrastructure itself (for example, the duration of a page visit).
             </ListItem>
             <ListItem>
-              Website refers to Yamato Finance, accessible from
-              https://yamato-app-4o5c.vercel.app/
+              Website refers to Earendel Labs Finance, accessible from
+              https://buzzkill-frontend-rjaoyldwc-earendel-labs.vercel.app/
             </ListItem>
             <ListItem>
               You means the individual accessing or using the Service, or the
@@ -202,11 +202,8 @@ const privacy_policy: NextPage = () => {
           </Text>
           <Text className="body">
             By visiting this page on our website:{" "}
-            <a
-              href="https://twitter.com/sahil_harriram"
-              className={styles.link}
-            >
-              https://twitter.com/sahil_harriram
+            <a href="https://twitter.com/BuzzkillNFT" className={styles.link}>
+              https://twitter.com/BuzzkillNFT
             </a>
           </Text>
         </Flex>

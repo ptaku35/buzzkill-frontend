@@ -9,7 +9,7 @@ const terms_and_conditions: NextPage = () => {
     <>
       <Layout>
         <Head>
-          <title>BlocTrace</title>
+          <title>Buzzkill</title>
           {/* <meta name="description" content="noindex,nofollow" /> */}
         </Head>
 
@@ -61,7 +61,7 @@ const terms_and_conditions: NextPage = () => {
 
             <Text className="body">
               <strong>Company</strong> (referred to as either "the Company",
-              "We", "Us" or "Our" in this Agreement) refers to Yamato Finance.
+              "We", "Us" or "Our" in this Agreement) refers to Earendel Labs.
             </Text>
 
             <Text className="body">
@@ -89,9 +89,12 @@ const terms_and_conditions: NextPage = () => {
             </Text>
 
             <Text className="body">
-              <strong>Website</strong> refers to Yamato Finance, accessible from{" "}
-              <Link href="https://yamato-app-4o5c.vercel.app/" isExternal>
-                https://yamato-app-4o5c.vercel.app/
+              <strong>Website</strong> refers to Earendel Labs, accessible from{" "}
+              <Link
+                href="https://buzzkill-frontend-rjaoyldwc-earendel-labs.vercel.app/"
+                isExternal
+              >
+                https://buzzkill-frontend-rjaoyldwc-earendel-labs.vercel.app/
               </Link>
               .
             </Text>
@@ -361,10 +364,10 @@ const terms_and_conditions: NextPage = () => {
             <Text className="body">
               <Link
                 className={styles.link}
-                href="https://twitter.com/sahil_harriram"
+                href="https://twitter.com/BuzzkillNFT"
                 isExternal
               >
-                https://twitter.com/sahil_harriram
+                https://twitter.com/BuzzkillNFT
               </Link>
             </Text>
           </Box>
