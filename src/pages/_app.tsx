@@ -18,10 +18,11 @@ import {
   walletConnectWallet,
   metaMaskWallet,
   ledgerWallet,
+  coin98Wallet,
 } from "@rainbow-me/rainbowkit/wallets";
-
+import { vicTestNet, vicMainnet } from "../libs/chains";
 import { createConfig, configureChains, WagmiConfig } from "wagmi";
-import { avalanche, avalancheFuji } from "wagmi/chains";
+
 import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 
@@ -46,7 +47,7 @@ const walletConnectProjectId: string | undefined =
 const infuraApiKey: string | undefined = process.env.NEXT_PUBLIC_INFURA_API_KEY;
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [avalancheFuji, avalanche],
+  [vicTestNet, vicMainnet],
   [infuraProvider({ apiKey: infuraApiKey! }), publicProvider()]
 );
 
@@ -55,13 +56,14 @@ const connectors = connectorsForWallets([
     groupName: "Recommended",
     wallets: [
       injectedWallet({ chains }),
-      rainbowWallet({ projectId: walletConnectProjectId!, chains }),
-      walletConnectWallet({ projectId: walletConnectProjectId!, chains }),
+      coin98Wallet({ projectId: walletConnectProjectId!, chains }),
       metaMaskWallet({
         projectId: walletConnectProjectId!,
         chains,
         shimDisconnect: true,
       }),
+      rainbowWallet({ projectId: walletConnectProjectId!, chains }),
+      walletConnectWallet({ projectId: walletConnectProjectId!, chains }),
     ],
   },
 ]);
