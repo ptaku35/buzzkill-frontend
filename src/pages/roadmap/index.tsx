@@ -2,64 +2,45 @@
 import Layout from "../../Components/Layout/Layout";
 import Head from "next/head";
 import { Box, Flex, Heading, Image } from "@chakra-ui/react";
+import Container from "Components/Container/Container";
 
 export default function Retailers() {
   return (
     <>
       <Layout>
         <Head>
-          <title>Buzzkill - Retailers</title>
+          <title>Buzzkill Play Game</title>
           {/* <meta name="description" content="noindex,nofollow" /> */}
         </Head>
-        <Flex justifyContent="center" direction="column">
-          <Heading
-            as="h2"
-            fontSize="5rem"
-            color="brand.0"
-            fontWeight="medium"
-            size="lg"
-            p="2rem"
-            mb="1rem"
-            textAlign="center"
-          >
-            Retailers
-          </Heading>
-
+        <Heading
+          as="h1"
+          fontSize="10rem"
+          color="white "
+          fontWeight="medium"
+          size="lg"
+          p="10rem"
+          textAlign="center"
+        >
+          Roadmap
+        </Heading>
+        <Container>
           <Box
-            display="flex"
-            p="2px 0px 10px 0px"
-            justifyContent="center"
-            alignItems="center"
+            position="relative"
+            width="full"
+            height="full" // Fixed height for the hero image container
+            overflow="hidden" // Ensure the overflowing parts of the image are not shown
           >
             <Image
-              src="/retailers_background.png"
-              alt="Image"
-              borderRadius="15px"
-              w="1200px"
+              src="/roadmap.svg"
+              alt="Hero Image"
+              borderRadius="0px"
+              width="full"
+              height="full"
+              objectFit="cover"
+              objectPosition="center center" // Adjust this if you need to shift the hero image
             />
-            <Box
-              position="absolute"
-              top="50%"
-              left="50%"
-              transform="translate(-50%, -50%)"
-              textAlign="center"
-            >
-              <Heading
-                as="h2"
-                fontSize="5rem"
-                color="brand.0"
-                fontWeight="medium"
-                size="lg"
-                p="32rem"
-                mb="10rem"
-                textAlign="center"
-                boxShadow="xl"
-              >
-                COMING SOON
-              </Heading>
-            </Box>
           </Box>
-        </Flex>
+        </Container>
       </Layout>
     </>
   );

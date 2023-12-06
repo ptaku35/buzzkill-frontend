@@ -1,58 +1,41 @@
 //import styles from "../styles/Home.module.css";
 import Layout from "../../Components/Layout/Layout";
 import Head from "next/head";
-import { Box, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Center, Flex, Heading, Image } from "@chakra-ui/react";
+import Container from "Components/Container/Container";
 
-export default function Couriers() {
+export default function Play() {
   return (
     <>
       <Layout>
         <Head>
-          <title>BlocTrace - Couriers</title>
+          <title>Buzzkill Play Game</title>
           {/* <meta name="description" content="noindex,nofollow" /> */}
         </Head>
-        <Flex justifyContent="center" direction="column">
-          <Heading
-            as="h2"
-            fontSize="5rem"
-            color="brand.0"
-            fontWeight="medium"
-            size="lg"
-            p="2rem"
-            mb="1rem"
-            textAlign="center"
+        <Container fullWidth={true}>
+          <Box
+            position="relative"
+            width="full"
+            height="full" // Adjust the height as needed
+            overflow="hidden"
           >
-            Couriers / Shippers
-          </Heading>
-          <Box display="flex"p= "2px 0px 10px 0px" justifyContent="center" alignItems="center">
-            <Image
-              src="/shipper_background.png"
-              alt="Image"
-              borderRadius="15px"
-              w="1200px"
-            />
-            <Box
-              position="absolute"
-              top="50%"
-              left="50%"
-              transform="translate(-50%, -50%)"
-              textAlign="center"
+            {/* Use the native video tag here */}
+            <video
+              width="100%" // Make the video responsive by setting width to 100%
+              height="auto" // Set height to auto to maintain aspect ratio
+              autoPlay // Add autoPlay to play the video as soon as it's ready
+              loop // Add loop to continuously loop the video
+              muted // Mute the video to play it automatically in most browsers
+              style={{
+                borderRadius: "0px", // Apply border-radius if needed
+                objectFit: "cover", // Cover the box area just like objectFit for images
+              }}
             >
-              <Heading
-                as="h2"
-                fontSize="5rem"
-                color="brand.0"
-                fontWeight="medium"
-                size="lg"
-                p="32rem"
-                mb="1rem"
-                textAlign="center"
-              >
-                COMING SOON
-              </Heading>
-            </Box>
+              <source src="/volcano-smoke-map.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </Box>
-        </Flex>
+        </Container>
       </Layout>
     </>
   );
