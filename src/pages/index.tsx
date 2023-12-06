@@ -61,7 +61,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
           <Box
             position="relative"
             width="full"
-            height="1350px" // Fixed height for the hero image container
+            height="92vh"
             overflow="hidden" // Ensure the overflowing parts of the image are not shown
           >
             <Image
