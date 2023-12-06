@@ -68,12 +68,13 @@ export default function Home({ address }: AuthenticatedPageProps) {
             alignItems="center"
           >
             <Image
-              src="/map.png"
-              alt="map"
+              src="/hero-image-queen.png"
+              alt="Hero Image"
               borderRadius="0px"
-              w="100vw" // Set the Flex container width to 100% of the viewport width
-              h="auto" // Adjust the height automatically
-              maxW="none" // Ensure there are no max-width constraints
+              width="full" // Use the full width of the parent
+              height="1350px" // Set a fixed height to crop the top and bottom
+              objectFit="cover" // This will cover the area and crop the image as needed
+              objectPosition="center" // This centers the image, cropping equally on top and bottom
             />
             <Center
               position="absolute"
@@ -102,142 +103,141 @@ export default function Home({ address }: AuthenticatedPageProps) {
             </Center>
           </Box>
         </Container>
-
-        <Flex direction="column">
-          <Heading className="heading" padding="2rem 0rem 0rem 0rem">
-            About
-          </Heading>
-
-          <Text className="heading2" padding="5rem 0rem 10rem 5rem">
-            Get into the hive mind and earn that $HONEY. The first play-to-earn
-            game on the Viction ecosystem. Forage for resources, raid for glory,
-            upgrade you Beez, and strategise to make the make the most of your
-            resources.
-          </Text>
-        </Flex>
-
-        {/* CHARACTERS */}
-        <Heading
-          className="heading2"
-          fontSize="5rem"
-          padding="0rem 0rem 10rem 5rem"
-        >
-          View Your Characters{" "}
-        </Heading>
-        <SimpleGrid className={styles.simpleGrid} minChildWidth="140px">
-          <CardButton href="/oems">
-            <Image src="factory-icon.svg" alt=" " />
-            <Heading color="brand.20" margin="1.5rem" size="md">
-              OEM's
+        <Container>
+          <Flex direction="column">
+            <Heading className="heading" padding="2rem 0rem 0rem 0rem">
+              About
             </Heading>
-            <Text fontSize="sm" color="brand.20">
-              Enhance your brand reputation with on-chain component tracing,
-              eliminating counterfeits.
-            </Text>
-          </CardButton>
 
-          <CardButton href="/couriers">
-            <Image src="shipping-icon.svg" alt="Vote" />
-            <Heading color="brand.0" margin="1.5rem" size="md">
-              Shippers/Couriers
-            </Heading>
-            <Text fontSize="sm" color="brand.20">
-              Ensure your customers products get from A to B by verifying
-              shipping consignments
+            <Text className="heading2" padding="5rem 0rem 10rem 5rem">
+              Get into the hive mind and earn that $HONEY. The first
+              play-to-earn game on the Viction ecosystem. Forage for resources,
+              raid for glory, upgrade you Beez, and strategise to make the make
+              the most of your resources.
             </Text>
-          </CardButton>
+          </Flex>
 
-          <CardButton href="/product_makers">
-            <Image
-              src="/circuitboard-icon.svg"
-              alt="proposals image"
-              borderRadius="lg"
-            />
-            <Heading color="brand.20" margin="1.5rem" size="md">
-              Product Makers
-            </Heading>
-            <Text fontSize="sm" color="brand.20">
-              Ensure the highest quality of your products by tracing your BOM
-              directly from the OEM
-            </Text>
-          </CardButton>
-
-          <CardButton href="/retailers">
-            <Image src="retailer-icon.svg" alt="Docs Image" />
-            <Heading color="brand.20" margin="1.5rem" size="md">
-              Retailers/Distributors
-            </Heading>
-            <Text fontSize="sm" color="brand.20">
-              Provide your customers with confidence of the quality and
-              legitimacy of the products you sell
-            </Text>
-          </CardButton>
-        </SimpleGrid>
-
-        {/* How it Works */}
-        <Flex padding="10rem 0rem 0rem 0rem">
+          {/* CHARACTERS */}
           <Heading
             className="heading2"
             fontSize="5rem"
-            padding="5rem 0rem 5rem 5rem"
-            color="brand.20"
-            textAlign="left"
+            padding="0rem 0rem 10rem 5rem"
           >
-            Roadmap
+            View Your Characters{" "}
           </Heading>
-          <Image src="userflow.svg" width="100%"></Image>
-        </Flex>
+          <SimpleGrid className={styles.simpleGrid} minChildWidth="140px">
+            <CardButton href="/oems">
+              <Image src="factory-icon.svg" alt=" " />
+              <Heading color="brand.20" margin="1.5rem" size="md">
+                OEM's
+              </Heading>
+              <Text fontSize="sm" color="brand.20">
+                Enhance your brand reputation with on-chain component tracing,
+                eliminating counterfeits.
+              </Text>
+            </CardButton>
 
-        {/* STATS */}
-        <Flex className={styles.flexContainer}>
-          <DarkBackground>
-            <Box>
-              <Flex flexDirection={["column", "row"]} alignItems="start">
-                <Box mr={8}>
-                  <Image
-                    className={styles.image}
-                    src="bloctrace-logo.svg" //"bloctrace_snowflake.svg"
-                    alt="bloctrace Logo"
-                    mr={3}
-                    width={300}
-                    height={300}
-                  />
-                </Box>
-                <Flex flexDirection="column" alignItems="center" width="80%">
-                  <Heading
-                    className={styles.heading1}
-                    fontWeight="bold"
-                    mt={20}
-                    color="brand.0"
-                  >
-                     Game Stats
-                  </Heading>
+            <CardButton href="/couriers">
+              <Image src="shipping-icon.svg" alt="Vote" />
+              <Heading color="brand.0" margin="1.5rem" size="md">
+                Shippers/Couriers
+              </Heading>
+              <Text fontSize="sm" color="brand.20">
+                Ensure your customers products get from A to B by verifying
+                shipping consignments
+              </Text>
+            </CardButton>
 
-                  <Box flex="1" mt={14} width="100%">
-                    <Flex justifyContent="space-around">
-                      <Box textAlign="center">
-                        <Text className="body">Active Hives</Text>
-                        <Text className="heading2">10</Text>
-                      </Box>
+            <CardButton href="/product_makers">
+              <Image
+                src="/circuitboard-icon.svg"
+                alt="proposals image"
+                borderRadius="lg"
+              />
+              <Heading color="brand.20" margin="1.5rem" size="md">
+                Product Makers
+              </Heading>
+              <Text fontSize="sm" color="brand.20">
+                Ensure the highest quality of your products by tracing your BOM
+                directly from the OEM
+              </Text>
+            </CardButton>
 
-                      <Box textAlign="center">
-                        <Text className="body"> Raids completed</Text>
-                        <Text className="heading2">300</Text>
-                      </Box>
+            <CardButton href="/retailers">
+              <Image src="retailer-icon.svg" alt="Docs Image" />
+              <Heading color="brand.20" margin="1.5rem" size="md">
+                Retailers/Distributors
+              </Heading>
+              <Text fontSize="sm" color="brand.20">
+                Provide your customers with confidence of the quality and
+                legitimacy of the products you sell
+              </Text>
+            </CardButton>
+          </SimpleGrid>
 
-                      <Box textAlign="center">
-                        <Text className="body">
-                          NFTs minted
-                        </Text>
-                        <Text className="heading2">3000</Text>
-                      </Box>
-                    </Flex>
+          {/* How it Works */}
+          <Flex padding="10rem 0rem 0rem 0rem">
+            <Heading
+              className="heading2"
+              fontSize="5rem"
+              padding="5rem 0rem 5rem 5rem"
+              color="brand.20"
+              textAlign="left"
+            >
+              Roadmap
+            </Heading>
+            <Image src="userflow.svg" width="100%"></Image>
+          </Flex>
+
+          {/* STATS */}
+          <Flex className={styles.flexContainer}>
+            <DarkBackground>
+              <Box>
+                <Flex flexDirection={["column", "row"]} alignItems="start">
+                  <Box mr={8}>
+                    <Image
+                      className={styles.image}
+                      src="bloctrace-logo.svg" //"bloctrace_snowflake.svg"
+                      alt="bloctrace Logo"
+                      mr={3}
+                      width={300}
+                      height={300}
+                    />
                   </Box>
+                  <Flex flexDirection="column" alignItems="center" width="80%">
+                    <Heading
+                      className={styles.heading1}
+                      fontWeight="bold"
+                      mt={20}
+                      color="brand.0"
+                    >
+                      Game Stats
+                    </Heading>
+
+                    <Box flex="1" mt={14} width="100%">
+                      <Flex justifyContent="space-around">
+                        <Box textAlign="center">
+                          <Text className="body">Active Hives</Text>
+                          <Text className="heading2">10</Text>
+                        </Box>
+
+                        <Box textAlign="center">
+                          <Text className="body"> Raids completed</Text>
+                          <Text className="heading2">300</Text>
+                        </Box>
+
+                        <Box textAlign="center">
+                          <Text className="body">NFTs minted</Text>
+                          <Text className="heading2">3000</Text>
+                        </Box>
+                      </Flex>
+                    </Box>
+                  </Flex>
                 </Flex>
-              </Flex>
-            </Box>
-          </DarkBackground>
-        </Flex>
+              </Box>
+            </DarkBackground>
+          </Flex>
+        </Container>
       </Layout>
     </>
   );

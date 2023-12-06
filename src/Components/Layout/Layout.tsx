@@ -17,19 +17,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* this is the whole screen background*/}
       <div className={styles.flex_background}>
         <Header />
-        <Container>
-          <Flex direction="column" minH="100vh" textAlign="center">
-            <Box
-              bg="transparent"
-              backgroundSize="cover"
-              backgroundAttachment="fixed"
-            >
-              {children}
-            </Box>
+        <Flex direction="column" minH="100vh" textAlign="center">
+          <Box
+            bg="transparent"
+            backgroundSize="cover"
+            backgroundAttachment="fixed"
+          >
+            {children}
+          </Box>
 
-            <Footer />
-          </Flex>
-        </Container>
+          <Footer />
+        </Flex>
       </div>
     </>
   );
