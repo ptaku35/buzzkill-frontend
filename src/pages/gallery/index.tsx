@@ -56,11 +56,13 @@ export default function Gallery() {
                 aria-label={`Slide ${index}`}
                 icon={<FaCircle />}
                 size="sm"
-                color={
-                  currentImage === index ? "whiteAlpha.900" : "whiteAlpha.500"
-                }
+                color={currentImage === index ? "#BC8E2D" : "whiteAlpha.500"}
                 onClick={() => setCurrentImage(index)}
                 _focus={{ boxShadow: "none" }}
+                _hover={{
+                  bgColor: "transparent", // Keeps the background transparent on hover
+                  color: "#F4CA66", // Yellow color on hover
+                }}
               />
             ))}
           </Flex>

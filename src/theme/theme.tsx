@@ -6,7 +6,7 @@ const myTheme = extendTheme({
     brand: {
       0: "#F1B31C",   // Bright Yellow
       20: "#715622",  // Brown
-      40: "#725E2F",  // Olfive
+      40: "#725E2F",  // Olive
       50: "#F4CA66",  // Light Yellow
       60: "#BC8E2D",  // Gold
       70: "#265D89",  // Dark Blue
