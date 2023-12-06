@@ -13,12 +13,7 @@ export default function Gameplay() {
           {/* <meta name="description" content="noindex,nofollow" /> */}
         </Head>
         <Container fullWidth={true}>
-          <Box
-            position="relative"
-            width="full"
-            height="full" // Adjust the height as needed
-            overflow="hidden"
-          >
+          <Box position="relative" width="full" height="88vh" overflow="hidden">
             <Image
               src="/ocean.png"
               alt="Hero Image"

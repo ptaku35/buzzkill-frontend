@@ -22,12 +22,11 @@
   }
 
   .header .nav_menu {
-    margin: 0; 
+    margin: 0;
   }
 
   .header .connect {
     justify-content: flex-end;
-    
   }
 
   .header .connect a {

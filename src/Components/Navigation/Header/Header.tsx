@@ -108,7 +108,7 @@ export default function Header() {
             color="brand.0"
             fontSize="30px"
             _hover={{
-              borderColor: "brand.300",
+              borderColor: "brand.50",
               borderBottomWidth: "2px",
               borderRadius: "1px",
               transition: "ease-in-out 0.2s",
@@ -124,7 +124,7 @@ export default function Header() {
             fontSize="30px"
             aria-current="page"
             _hover={{
-              borderColor: "brand.300",
+              borderColor: "brand.50",
               borderBottomWidth: "2px",
               borderRadius: "0",
               transition: "ease-in-out 0.2s",
@@ -139,7 +139,7 @@ export default function Header() {
             fontSize="30px"
             aria-current="page"
             _hover={{
-              borderColor: "brand.300",
+              borderColor: "brand.50",
               borderBottomWidth: "2px",
               borderRadius: "0",
               transition: "ease-in-out 0.2s",
@@ -154,7 +154,7 @@ export default function Header() {
             color="brand.0"
             fontSize="30px"
             _hover={{
-              borderColor: "brand.300",
+              borderColor: "brand.50",
               borderBottomWidth: "2px",
               borderRadius: "0",
               transition: "ease-in-out 0.2s",
@@ -174,7 +174,7 @@ export default function Header() {
             color="brand.0"
             fontSize="30px"
             _hover={{
-              borderColor: "brand.300",
+              borderColor: "brand.50",
               borderBottomWidth: "2px",
               borderRadius: "0",
               transition: "ease-in-out 0.2s",

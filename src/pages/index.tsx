@@ -96,13 +96,17 @@ export default function Home({ address }: AuthenticatedPageProps) {
           <Flex direction="column">
             <Heading
               className="heading"
-              fontSize="5rem"
+              fontSize="40px"
               padding="12rem 0rem 0rem 0rem"
             >
               About
             </Heading>
 
-            <Text className="heading2" padding="5rem 30rem 10rem 30rem">
+            <Text
+              className="heading2"
+              fontSize="30px"
+              padding="5rem 30rem 10rem 30rem"
+            >
               Get into the hive mind and earn that $HONEY. The first
               play-to-earn game on the Viction ecosystem. Forage for resources,
               raid for glory, upgrade you Beez, and strategise to make the make
@@ -113,7 +117,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
         {/* CHARACTERS */}
         <Heading
           className="heading2"
-          fontSize="5rem"
+          fontSize="40px"
           padding="10rem 0rem 5rem 5rem"
         >
           Choose from 2 Class of Characters{" "}
@@ -139,7 +143,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
             <Text fontSize="md" color="white">
               Clad in ornate armor resembling the intricate patterns of
               honeycombs, this warrior bee exudes a majestic aura. He excels in
-              frontline assaults and defensive stronghold tactics.
+              frontline assaults.
             </Text>
           </CardButton>
 
@@ -188,19 +192,26 @@ export default function Home({ address }: AuthenticatedPageProps) {
           </CardButton>
         </SimpleGrid>
 
-        <Container fullWidth={true}>
+        <Container>
           <Box
             overflow="hidden" // ensures the content doesn't overflow
-            p="20rem 10rem 10rem 10rem " // padding inside the box
+            p="20rem 12rem 10rem 12rem " // padding inside the box
           >
             <Flex
               direction={{ base: "column", md: "row" }}
-              gap="30rem"
+              //gap="10rem"
+
               h="full"
+              w="full"
             >
               {/* Left side image container */}
-              <Box flex="2">
+              <Box
+                flex="2"
+                w={{ base: "100%", md: "50%" }}
+                p="2rem 5rem 2rem 0rem "
+              >
                 <Image
+                  h="500px"
                   src="/river.png" // the image path
                   borderRadius="10px"
                   alt="River Hive" // alt text for the image
@@ -208,146 +219,167 @@ export default function Home({ address }: AuthenticatedPageProps) {
                   objectFit="cover" // ensures the image covers the box area
                 />
               </Box>
-              {/* Right side content container */}
-              <Flex
-                flex="2" // takes twice as much width as the image container
-                direction="column" // stack items vertically
-                justify="center" // centers content vertically
-                padding="0rem 3rem 0rem 3rem" // padding inside the content container
-              >
-                <Text
-                  className="Heading"
-                  color="white"
-                  fontSize="50px"
-                  align="left"
+              <Box flex="2" w={{ base: "100%", md: "50%" }}>
+                {/* Right side content container */}
+                <Flex
+                  flex="2" // takes twice as much width as the image container
+                  direction="column" // stack items vertically
+                  justify="center" // centers content vertically
+                  padding="10rem 10rem 5rem 10rem" // padding inside the content container
                 >
-                  Forage for Resources
-                </Text>
-                <Text
-                  fontSize="30px"
-                  color="white"
-                  m="10rem 0rem 10rem 0rem"
-                  align="left"
-                >
-                  Forage for resource in the environment.<br></br> Use those
-                  resources to upgrade your NFT <br></br> or construct buildings
-                  inside the hive.
-                </Text>
-                <Button w="auto" maxW="md">
-                  Learn More
-                </Button>
-              </Flex>
-            </Flex>
-          </Box>
-        </Container>
-
-        <Container fullWidth={true}>
-          <Box
-            overflow="hidden" // ensures the content doesn't overflow
-            p="10rem 10rem" // padding inside the box
-          >
-            <Flex
-              direction={{ base: "column", md: "row" }}
-              gap="30rem"
-              h="full"
-            >
-              {/* Left side image container */}
-              <Flex
-                flex="2" // takes twice as much width as the image container
-                direction="column" // stack items vertically
-                justify="center" // centers content vertically
-                padding="0rem 3rem 0rem 3rem" // padding inside the content container
-              >
-                <Text
-                  className="Heading"
-                  color="white"
-                  fontSize="50px"
-                  align="left"
-                >
-                  Raid for Glory
-                </Text>
-                <Text
-                  fontSize="30px"
-                  color="white"
-                  m="10rem 0rem 10rem 0rem"
-                  align="left"
-                >
-                  Steal $HONEY from other hives in carefully <br></br> planned
-                  out raids. Know your risks and reap <br></br> your rewards.
-                </Text>
-                <Button w="auto" maxW="md">
-                  Learn More
-                </Button>
-              </Flex>
-
-              {/* Right side content container */}
-              <Box flex="2">
-                <Image
-                  src="/mountain-world.png" // the image path
-                  borderRadius="10px"
-                  alt="Mountain Hive" // alt text for the image
-                  objectFit="cover" // ensures the image covers the box area
-                  boxShadow="0 0 8px 2px rgba(255, 255, 180, 0.4), 0 0 8px 2px rgba(255, 255, 255, 0.4)" // Glow effect
-                />
+                  <Text
+                    className="Heading"
+                    color="white"
+                    fontSize="40px"
+                    align="left"
+                  >
+                    Forage for Resources
+                  </Text>
+                  <Text
+                    fontSize="20px"
+                    color="white"
+                    padding="5rem 0rem 5rem 0rem" // padding inside the content container
+                    align="left"
+                  >
+                    Forage for resource in the environment. Use those resources
+                    to upgrade your NFT or construct buildings inside the hive.
+                  </Text>
+                  <Button w="auto" maxW="md">
+                    Learn More
+                  </Button>
+                </Flex>
               </Box>
             </Flex>
           </Box>
         </Container>
-        <Container fullWidth={true}>
+
+        <Container>
           <Box
             overflow="hidden" // ensures the content doesn't overflow
-            p="20rem 10rem 10rem 10rem " // padding inside the box
+            p="10rem 12rem 10rem 12rem " // padding inside the box
           >
             <Flex
               direction={{ base: "column", md: "row" }}
-              gap="30rem"
+              //gap="10rem"
+
               h="full"
+              w="full"
             >
               {/* Left side image container */}
-              <Box flex="2">
+              <Box flex="2" w={{ base: "100%", md: "50%" }}>
+                <Flex
+                  flex="2" // takes twice as much width as the image container
+                  direction="column" // stack items vertically
+                  justify="center" // centers content vertically
+                  padding="10rem 10rem 5rem 10rem" // padding inside the content container
+                >
+                  <Text
+                    className="Heading"
+                    color="white"
+                    fontSize="40px"
+                    align="left"
+                  >
+                    Raid for Glory
+                  </Text>
+                  <Text
+                    fontSize="20px"
+                    color="white"
+                    padding="5rem 0rem 5rem 0rem" // padding inside the content container
+                    align="left"
+                  >
+                    Steal $HONEY from other hives in carefully planned out
+                    raids. Know your risks and reap your rewards.
+                  </Text>
+                  <Button w="auto" maxW="md">
+                    Learn More
+                  </Button>
+                </Flex>
+              </Box>
+
+              {/* Right side content container */}
+              <Box
+                flex="2"
+                p="2rem 0rem 2rem 10rem "
+                w={{ base: "100%", md: "50%" }}
+              >
                 <Image
-                  src="/ocean.png" // the image path
+                  h="500px"
+                  src="/mountain-world.png"
                   borderRadius="10px"
-                  alt="River Hive" // alt text for the image
+                  alt="Mountain Hive"
                   boxShadow="0 0 8px 2px rgba(255, 255, 180, 0.4), 0 0 8px 2px rgba(75, 0, 130, 0.4)" // Glow effect
                   objectFit="cover" // ensures the image covers the box area
                 />
               </Box>
-              {/* Right side content container */}
-              <Flex
-                flex="2" // takes twice as much width as the image container
-                direction="column" // stack items vertically
-                justify="center" // centers content vertically
-                padding="0rem 3rem 0rem 3rem" // padding inside the content container
-              >
-                <Text
-                  className="Heading"
-                  color="white"
-                  fontSize="50px"
-                  align="left"
-                >
-                  Get into the Hive Mind
-                </Text>
-                <Text
-                  fontSize="30px"
-                  color="white"
-                  m="10rem 0rem 10rem 0rem"
-                  align="left"
-                >
-                  Work with members inside your hive to boost <br></br> your
-                  productivity, construct buildings and work <br></br>together
-                  to boost your $HONEY production
-                </Text>
-                <Button w="auto" maxW="md">
-                  Learn More
-                </Button>
-              </Flex>
             </Flex>
           </Box>
         </Container>
+
+        <Container>
+          <Box
+            overflow="hidden" // ensures the content doesn't overflow
+            p="10rem 12rem 10rem 12rem " // padding inside the box
+          >
+            <Flex
+              direction={{ base: "column", md: "row" }}
+              //gap="10rem"
+
+              h="full"
+              w="full"
+            >
+              {/* Left side image container */}
+              <Box
+                flex="2"
+                p="2rem 10rem 2rem 5rem "
+                w={{ base: "100%", md: "50%" }}
+              >
+                <Image
+                  h="500px"
+                  src="/ocean.png" // the image path
+                  borderRadius="10px"
+                  alt="ocean Hive" // alt text for the image
+                  boxShadow="0 0 8px 2px rgba(255, 255, 180, 0.4), 0 0 8px 2px rgba(75, 0, 130, 0.4)" // Glow effect
+                  objectFit="cover" // ensures the image covers the box area
+                />
+              </Box>
+              <Box flex="2" w={{ base: "100%", md: "50%" }}>
+                {/* Right side content container */}
+                <Flex
+                  flex="2" // takes twice as much width as the image container
+                  direction="column" // stack items vertically
+                  justify="center" // centers content vertically
+                  padding="10rem 10rem 5rem 10rem" // padding inside the content container
+                >
+                  <Text
+                    className="Heading"
+                    color="white"
+                    fontSize="40px"
+                    align="left"
+                  >
+                    Get into the Hive Mind
+                  </Text>
+                  <Text
+                    fontSize="20px"
+                    color="white"
+                    padding="5rem 0rem 5rem 0rem" // padding inside the content container
+                    align="left"
+                  >
+                    Work with members inside your hive to boos your
+                    productivity, construct buildings and work together to boost
+                    your $HONEY production
+                  </Text>
+                  <Button w="auto" maxW="md">
+                    Learn More
+                  </Button>
+                </Flex>
+              </Box>
+            </Flex>
+          </Box>
+        </Container>
+
         {/*ROADMAP*/}
         <Container>
-          <Flex padding="10rem 0rem 0rem 0rem">
+          <Flex padding="10rem 10rem 0rem 14rem">
             <Heading
               className="heading1"
               fontSize="8rem"
@@ -361,28 +393,31 @@ export default function Home({ address }: AuthenticatedPageProps) {
           </Flex>
 
           {/* STATS */}
-          <Flex className={styles.flexContainer}>
+          <Flex
+            className={styles.flexContainer}
+            padding="10rem 10rem 0rem 10rem"
+          >
             <DarkBackground>
               <Box>
                 <Flex flexDirection={["column", "row"]} alignItems="start">
-                  <Box mr={8}>
+                  <Box ml={8}>
                     <Image
                       className={styles.image}
-                      src="cog.svg" //"bloctrace_snowflake.svg"
-                      alt="bloctrace Logo"
+                      src="bee-emblem.svg"
+                      alt="bee emblek Logo"
                       mr={3}
                       width={300}
                       height={300}
                     />
                   </Box>
-                  <Flex flexDirection="column" alignItems="center" width="80%">
+                  <Flex flexDirection="column" alignItems="center" width="75%">
                     <Heading
                       className={styles.heading1}
                       fontWeight="bold"
                       mt={20}
-                      color="brand.0"
+                      color="white"
                     >
-                      Game Stats
+                      Game Statistics
                     </Heading>
 
                     <Box flex="1" mt={14} width="100%">

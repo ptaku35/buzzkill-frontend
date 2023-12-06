@@ -32,7 +32,7 @@ export default function Gallery() {
         <title>Buzzkill Gallery</title>
       </Head>
       <Container fullWidth={true}>
-        <Box position="relative" width="full" height="85vh" overflow="hidden">
+        <Box position="relative" width="full" height="88vh" overflow="hidden">
           <Image
             src={images[currentImage]}
             alt="Gallery Image"

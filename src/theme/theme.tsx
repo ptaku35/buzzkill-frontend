@@ -12,6 +12,7 @@ const myTheme = extendTheme({
       70: "#265D89",  // Dark Blue
       80: "#2B328F",  // Blue
       100: "#4D3092", // Purple
+      110: "#967124", // darker gold
     },
   },
   fonts: {
