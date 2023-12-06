@@ -1,0 +1,4 @@
+/* Play.module.css */
+.loadingCursor {
+  cursor: url("/spinner.png"), auto; /* Replace 'spinner.png' with the URL of your loading spinner image */
+}
