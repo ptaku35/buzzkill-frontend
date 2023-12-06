@@ -185,7 +185,7 @@ export default function Header() {
         </Link>
       </ButtonGroup>
       <Spacer></Spacer>
-      <Flex fontSize="23px" className={styles.connect}>
+      <Flex fontSize="25px">
         <ConnectButton
           showBalance={{
             smallScreen: false,

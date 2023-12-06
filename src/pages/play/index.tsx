@@ -13,12 +13,7 @@ export default function Play() {
           {/* <meta name="description" content="noindex,nofollow" /> */}
         </Head>
         <Container fullWidth={true}>
-          <Box
-            position="relative"
-            width="full"
-            height="full" // Adjust the height as needed
-            overflow="hidden"
-          >
+          <Box position="relative" width="full" height="85vh" overflow="hidden">
             {/* Use the native video tag here */}
             <video
               width="100%" // Make the video responsive by setting width to 100%

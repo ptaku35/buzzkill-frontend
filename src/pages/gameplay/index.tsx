@@ -24,7 +24,7 @@ export default function Gameplay() {
               alt="Hero Image"
               borderRadius="0px"
               width="full"
-              height="full"
+              height="85vh"
               objectFit="cover"
               objectPosition="center center" // Adjust this if you need to shift the hero image
             />

@@ -89,7 +89,7 @@ function MyApp({
         <SessionProvider refetchInterval={0} session={pageProps.session}>
           <RainbowKitProvider
             theme={darkTheme({
-              accentColor: "#D66E36",
+              accentColor: "#BC8E2D",
               accentColorForeground: "white",
               borderRadius: "medium",
               fontStack: "system",
