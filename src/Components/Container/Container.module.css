@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.default {
+  max-width: 130rem;
+}
+
+.small {
+  max-width: 64rem;
+}
+
+.fullWidth {
+  max-width: none; /* This will allow the container to take up full screen width */
+}

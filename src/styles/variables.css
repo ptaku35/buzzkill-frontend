@@ -1,0 +1,21 @@
+:root {
+  --white: #fff;
+  --black: #000;
+  --outline: #1976d24d;
+  --primary: #00cd74;
+  --primaryDark: #00b466;
+  --secondary: #313245;
+  --secondaryDark: #262736;
+  --greyDark: #aaa;
+  --grey: #ddd;
+  --error: #ff3860;
+  --warning: #fe9d10; 
+
+  --fontSizeSmall: 1.2rem;
+  --fontSizeMedium: 1.4rem;
+  --fontSizeLarge: 1.8rem;
+
+  --fontFamily: "Roboto", sans-serif;
+
+  --speed: 500ms;
+}

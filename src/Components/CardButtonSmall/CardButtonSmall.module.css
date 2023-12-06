@@ -1,0 +1,7 @@
+.CardButtonSmall {
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Add a border */
+  background-color: #ffffff; /* Set the background color */
+}

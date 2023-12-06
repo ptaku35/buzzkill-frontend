@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/signup/index.jsx", "src/pages/user/index.jsx", "src/pages/gallery/account/index.jsx", "src/pages/gallery/index.tsx", "src/pages/gallery/create_batch/index.tsx", "src/pages/gallery/manage_batch_test/index.jsx", "src/pages/gallery/manage_batch/index.jsx"],
+  "exclude": ["node_modules"]
+}

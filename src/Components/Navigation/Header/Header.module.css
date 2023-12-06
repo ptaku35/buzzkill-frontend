@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6.4rem;
+  color: brand.0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #1f364c;
+}
+@media screen and (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    padding: 4rem 10rem 4rem 8rem;
+  }
+
+  .header .nav_logo {
+    margin-left: 3rem;
+  }
+
+  .header .nav_menu {
+    margin: 0;
+  }
+
+  .header .connect {
+    justify-content: flex-end;
+  }
+
+  .header .connect a {
+    margin-left: 3rem;
+  }
+}
+.yamato_logo {
+  width: 20rem;
+  cursor: pointer;
+}

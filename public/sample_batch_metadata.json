@@ -1,0 +1,19 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Product Name",
+      "value": "semi-conductor"
+    },
+    {
+      "trait_type": "Batch Owner",
+      "value": "BlocTrace Industries"
+    },
+    {
+      "trait_type": "Batch ID",
+      "value": "BN000294560"
+    }
+  ],
+  "description": "This is an example of a shipping consignment",
+  "image": "ipfs://QmcBAbb1cT7fn8VLozk1ZU52jstYqL3sj9p4gLo65nXknu",
+  "name": "shipment consigment"
+}
