@@ -4,10 +4,10 @@ import {
   ButtonGroup,
   Flex,
   Spacer,
+  Image,
   useToken,
 } from "@chakra-ui/react";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.css";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -96,21 +96,17 @@ export default function Header() {
         borderBottom: scrolled ? "1px solid #332018" : "none",
       }}
     >
-      {/* <Link href="/" shallow>
+      <Link href="/" shallow>
         <Box className={styles.nav_logo}>
-          <Image
-            src="/buzzkill-logo-text.png"
-            alt="Buzzkill-logo"
-            width={2000}
-            height={400}
-          />
+          <Image src="/buzzkill-logo-hero.svg" alt="Buzzkill-logo" />
         </Box>
-      </Link> */}
+      </Link>
       <Spacer></Spacer>
       <ButtonGroup className={styles.nav_menu} variant="ghost" gap="2">
         <Link href="/play" shallow>
           <Button
             color="brand.0"
+            fontSize="30px"
             _hover={{
               borderColor: "brand.300",
               borderBottomWidth: "2px",
@@ -125,6 +121,7 @@ export default function Header() {
         <Link href="/gallery" shallow>
           <Button
             color="brand.0"
+            fontSize="30px"
             aria-current="page"
             _hover={{
               borderColor: "brand.300",
@@ -139,6 +136,7 @@ export default function Header() {
         <Link href="/gameplay" shallow>
           <Button
             color="brand.0"
+            fontSize="30px"
             aria-current="page"
             _hover={{
               borderColor: "brand.300",
@@ -154,6 +152,7 @@ export default function Header() {
         <Link href="/roadmap" shallow>
           <Button
             color="brand.0"
+            fontSize="30px"
             _hover={{
               borderColor: "brand.300",
               borderBottomWidth: "2px",
@@ -173,6 +172,7 @@ export default function Header() {
         >
           <Button
             color="brand.0"
+            fontSize="30px"
             _hover={{
               borderColor: "brand.300",
               borderBottomWidth: "2px",
@@ -185,7 +185,7 @@ export default function Header() {
         </Link>
       </ButtonGroup>
       <Spacer></Spacer>
-      <Flex className={styles.connect}>
+      <Flex fontSize="23px" className={styles.connect}>
         <ConnectButton
           showBalance={{
             smallScreen: false,

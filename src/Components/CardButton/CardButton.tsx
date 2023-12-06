@@ -16,7 +16,7 @@ const CardButton = ({ children, href }: CardButtonProps) => {
       transition={{ duration: 0.2 }}
     >
       <Link href={href} passHref>
-        <Box className={styles.cardButton} bg="brand.100">
+        <Box className={styles.cardButton} bg="brand.60">
           {children}
         </Box>
       </Link>

@@ -6,7 +6,7 @@ const myTheme = extendTheme({
     brand: {
       0: "#F1B31C",   // Bright Yellow
       20: "#715622",  // Brown
-      40: "#725E2F",  // Olive
+      40: "#725E2F",  // Olfive
       50: "#F4CA66",  // Light Yellow
       60: "#BC8E2D",  // Gold
       70: "#265D89",  // Dark Blue
@@ -33,7 +33,7 @@ const myTheme = extendTheme({
     "3xl": "28px",
     "4xl": "36px",
     "5xl": "48px",
-    "6xl": "64px",
+    "6xl": "100px",
   },
   lineHeights: {
     normal: "normal",
