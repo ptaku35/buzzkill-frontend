@@ -4,7 +4,7 @@ import Layout from "../../Components/Layout/Layout";
 import Head from "next/head";
 import Container from "Components/Container/Container";
 import MapTriangle from "Components/MapTriangle/MapTriangle";
-import { Box, Spinner } from "@chakra-ui/react"; // Import Chakra UI components
+import { RingLoader } from "react-spinners"; // Import RingLoader component
 
 export default function Play() {
   const router = useRouter();
@@ -57,13 +57,8 @@ export default function Play() {
         <title>Buzzkill Play Game</title>
       </Head>
       <Container fullWidth={true}>
-        <Box
-          position="relative"
-          width="full"
-          height="90vh"
-          overflow="hidden"
-          // Use CSS to change the cursor when loading
-          cursor={isLoading ? "wait" : "default"}
+        <div
+          style={{ cursor: isLoading ? "none" : "auto" }} // Hide the cursor when loading, show it otherwise
         >
           {/* Main Image */}
           <video
@@ -82,22 +77,9 @@ export default function Play() {
             Your browser does not support the video tag.
           </video>
 
-          {/* Loading Spinner */}
-          {isLoading && (
-            <Spinner
-              position="absolute"
-              top="50%"
-              left="50%"
-              transform="translate(-50%, -50%)"
-              color="blue.500"
-              thickness="4px"
-              size="lg"
-            />
-          )}
-
           {/* Overlay triangles */}
           <MapTriangle
-            top="80%"
+            top="70%"
             left="75%"
             label="Sunlit Sands Hive"
             onClick={() => handleClick("Sunlit Sands Hive")}
@@ -105,8 +87,8 @@ export default function Play() {
           {"Sunlit Sands Hive"}
 
           <MapTriangle
-            top="15%"
-            left="85%"
+            top="20%"
+            left="82%"
             label="Emberglow Caldera Hive"
             onClick={() => handleClick("Emberglow Caldera Hive")}
           />
@@ -114,7 +96,7 @@ export default function Play() {
 
           <MapTriangle
             top="70%"
-            left="25%"
+            left="30%"
             label="Verdant Canopy Hive"
             onClick={() => handleClick("Verdant Canopy Hive")}
           />
@@ -135,7 +117,25 @@ export default function Play() {
             onClick={() => handleClick("Frostwing Glacier Hive")}
           />
           {"Frostwing Glacier Hive"}
-        </Box>
+        </div>
+        {/* Loading Spinner */}
+        {isLoading && (
+          <div
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 9999, // Ensure it's above everything else
+            }}
+          >
+            <RingLoader
+              size={150}
+              color={"#BC8E2D"} // Adjust the color as needed
+              loading={isLoading}
+            />
+          </div>
+        )}
       </Container>
     </Layout>
   );
