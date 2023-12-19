@@ -1,10 +1,9 @@
-
-
 # Usage
 
 1. Install:
-`npm install --legacy-peer-deps`
+   `npm install --legacy-peer-deps`
 2.
 3. Run:
-`npm run dev` 
+   `npm run dev`
 
+https://buzzkill-frontend-earendel-labs.vercel.app/
