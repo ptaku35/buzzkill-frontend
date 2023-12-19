@@ -100,7 +100,7 @@ export default function AshHive() {
     }
   }, [approvedStatus]);
 
-  // VISUAL VARIABLES
+  // Overlay Visual properties
   const semiTransparentBackgroundStyles: CSSProperties = {
     position: "absolute",
     top: "50%", // Adjust this value to position the background vertically
@@ -115,36 +115,36 @@ export default function AshHive() {
 
   const overlayImageStyles: ImageProps = {
     position: "absolute",
-    top: "-145%",
-    left: "65%",
-    width: "50%", // Adjust the width to make the overlay image smaller
-    height: "auto", // Maintain aspect ratio
-    objectFit: "cover" as ImageProps["objectFit"], // Explicitly specify the type
-    transform: "scale(0.2)", // Initial scale
-    zIndex: 2, // Set the z-index to 2 for the overlay image to place it on top
-    transition: "transform 0.3s ease-in-out", // Add a transition effect for the hover effect
-  };
+    top: "50%",
+    left: { base: "60%", md: "70%" }, // Adjusts position at base and md breakpoints
+    transform: {
+      base: "translateY(-50%) scale(0.15)", // Smaller scale for smaller screens
+      md: "translateY(-50%) scale(0.2)", // Larger scale for medium screens and up
+    },
+    width: { base: "10w", md: "40vw" }, // Smaller width on smaller screens, larger on medium and up
 
+    zIndex: 2,
+    transition: "transform 0.3s ease-in-out",
+  };
   const overlayImageHoverStyles = {
-    transform: "scale(0.21)", // Scale up on hover (adjust as needed, e.g., 0.25 for a smaller effect)
-  };
-
-  const overlayImageHiveHoverStyles = {
-    transform: "scale(0.21)", // Scale up on hover (adjust as needed, e.g., 0.25 for a smaller effect)
+    transform: "translateY(-50%) scale(0.22)", // Include translateY with a slight increase in scale
   };
 
   const overlayImageHiveStyles: ImageProps = {
     position: "absolute",
-    top: "-145%",
-    left: "50%",
-    width: "50%", // Adjust the width to make the overlay image smaller
-    height: "fit-content", // Adjust the height as needed
-    objectFit: "cover" as ImageProps["objectFit"], // Explicitly specify the type
-    transform: "scale(0.2)", // Initial scale
-    zIndex: 2, // Set the z-index to 2 for the overlay image to place it on top
-    transition: "transform 0.3s ease-in-out", // Add a transition effect for the hover effect
+    top: "50%",
+    left: { base: "40%", md: "60%" }, // Adjusts position at base and md breakpoints
+    transform: {
+      base: "translateY(-50%) scale(0.15)", // Smaller scale for smaller screens
+      md: "translateY(-50%) scale(0.2)", // Larger scale for medium screens and up
+    },
+    width: { base: "10vw", md: "40vw" }, // Smaller width on smaller screens, larger on medium and up
+    zIndex: 2,
+    transition: "transform 0.3s ease-in-out",
   };
-
+  const overlayImageHiveHoverStyles = {
+    transform: "translateY(-50%) scale(0.22)", // Include translateY with a slight increase in scale
+  };
   const handleStakeButtonClick = () => {
     if (!isApproved) {
       console.log("approva all state");
@@ -152,7 +152,6 @@ export default function AshHive() {
     } else {
       console.log("deposit Bee state");
       deposit?.();
-      
     }
   };
 
@@ -163,38 +162,42 @@ export default function AshHive() {
       </Head>
       <Container fullWidth={true}>
         <Box position="relative" width="full" height="15vh" overflow="hidden">
-          {/* Main Image */}
+          {/* Main Background Image */}
           <Image
             src="/fire-volcano.png"
             alt="Hero Image"
-            borderRadius="0px"
+            position="relative"
             width="full"
-            height="100%"
+            height="15vh"
+            overflow="hidden"
             objectFit="cover"
             objectPosition="center center"
-            zIndex={0} // Set the z-index lower than SemiTransparentBackground
+            zIndex={0}
           />
-
+          {/* SemiTransparent Background with Text */}
           <SemiTransparentBackground style={semiTransparentBackgroundStyles}>
-            {/* Use a Box or div with display flex to center the content inside SemiTransparentBackground */}
             <Box
+              position="absolute"
+              top="0"
+              left="0"
+              right="0"
+              bottom="0"
               display="flex"
-              alignItems="center" // This will vertically center the content
-              justifyContent="center" // This will horizontally center the content
-              height="100%" // Take the full height of the parent container
+              alignItems="center"
+              justifyContent="center"
             >
               <Heading
-                color="white" // Adjust the text color as needed
-                textAlign="center" // Center the text
-                zIndex={3} // Set the z-index higher than the image and SemiTransparentBackground
+                color="white"
+                textAlign="center"
+                zIndex={3}
+                whiteSpace="nowrap" // Prevent text from wrapping
+                // Optionally, add responsive font size here
               >
                 Ash Hive
               </Heading>
             </Box>
           </SemiTransparentBackground>
-          {/* Overlay triangles */}
-
-          {/* Wrap the overlay image with a Link */}
+          {/* back to emberglow caldera */}
           <Link href="/play/hives/emberglow-caldera-hive">
             <Image
               src="/emberglow-map.svg"
@@ -203,8 +206,7 @@ export default function AshHive() {
               {...overlayImageHiveStyles}
             />
           </Link>
-
-          {/* Wrap the overlay image with a Link */}
+          q {/* Back to Main Map */}
           <Link href="/play">
             <Image
               src="/small-map-distorted.svg"
@@ -215,7 +217,6 @@ export default function AshHive() {
           </Link>
         </Box>
       </Container>
-
       {/* HIVE CAPACITY */}
       <Container>
         {/* Stack the components vertically */}

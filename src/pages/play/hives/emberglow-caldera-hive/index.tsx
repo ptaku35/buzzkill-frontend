@@ -11,20 +11,20 @@ import { useRouter } from "next/router";
 export default function EmberglowCalderaHive() {
   const overlayImageStyles: ImageProps = {
     position: "absolute",
-    top: "-30%",
-    left: "60%",
-    width: "50%", // Adjust the width to make the overlay image smaller
-    height: "auto", // Maintain aspect ratio
-    objectFit: "cover" as ImageProps["objectFit"], // Explicitly specify the type
-    transform: "scale(0.2)", // Initial scale
-    zIndex: 2, // Set the z-index to 2 for the overlay image to place it on top
-    transition: "transform 0.3s ease-in-out", // Add a transition effect for the hover effect
-  };
+    top: "15%",
+    left: { base: "60%", md: "70%" }, // Adjusts position at base and md breakpoints
+    transform: {
+      base: "translateY(-50%) scale(0.15)", // Smaller scale for smaller screens
+      md: "translateY(-50%) scale(0.2)", // Larger scale for medium screens and up
+    },
+    width: { base: "10w", md: "40vw" }, // Smaller width on smaller screens, larger on medium and up
 
+    zIndex: 2,
+    transition: "transform 0.3s ease-in-out",
+  };
   const overlayImageHoverStyles = {
-    transform: "scale(0.25)", // Scale up on hover (adjust as needed, e.g., 0.25 for a smaller effect)
+    transform: "translateY(-50%) scale(0.22)", // Include translateY with a slight increase in scale
   };
-
   const semiTransparentBackgroundStyles: CSSProperties = {
     position: "absolute",
     top: "10%", // Adjust this value to position the background vertically
@@ -33,7 +33,7 @@ export default function EmberglowCalderaHive() {
     width: "fit-content", // Adjust the width as needed
     height: "fit-content", // Adjust the height as needed
     backgroundColor: "brand.50", // Directly use the color token from the theme
-    opacity: 0.5, // Adjust the opacity as needed
+    opacity: 1, // Adjust the opacity as needed
     zIndex: 2, // Make sure this is above the main image
   };
   const router = useRouter();
