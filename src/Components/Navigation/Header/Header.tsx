@@ -168,6 +168,22 @@ export default function Header() {
           </Button>
         </Link>
 
+        <Link href="/marketplace" shallow>
+          <Button
+            color="brand.0"
+            fontSize="27px"
+            fontWeight="normal"
+            _hover={{
+              borderColor: "brand.50",
+              borderBottomWidth: "2px",
+              borderRadius: "0",
+              transition: "ease-in-out 0.2s",
+            }}
+          >
+            Marketplace
+          </Button>
+        </Link>
+
         <Link
           href="https://earendel-labs.gitbook.io/buzzkilll-honeycomb-hustle/"
           target="_blank"

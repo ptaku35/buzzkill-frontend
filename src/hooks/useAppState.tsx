@@ -32,14 +32,14 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { useAccount, useContractRead } from "wagmi";
-import oemContractJson from "../assets/BlocTraceOEM.json";
+// import oemContractJson from "../assets/BlocTraceOEM.json";
 
-const abi = oemContractJson.abi;
-const oemAddress = "0xd96635bb9F92F89adc5F6B84432Bf2209771Eb67";
-const contractConfig = {
-  address: oemAddress,
-  abi: abi,
-};
+// const abi = oemContractJson.abi;
+// const oemAddress = "0xd96635bb9F92F89adc5F6B84432Bf2209771Eb67";
+// const contractConfig = {
+//   address: oemAddress,
+//   abi: abi,
+// };
 
 const dbInstance = collection(database, "users");
 
@@ -153,21 +153,21 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   }, [user?.profileId!]);
 
   // Fetch Data from Blockchain:
-  const { data: userBalance } = useContractRead({
-    address: oemAddress,
-    abi: abi,
-    functionName: "balanceOf",
-    args: [address],
-    watch: true,
-  });
-  const balance: number = Number(userBalance);
-  useEffect(() => {
-    if (balance > 0) {
-      setIsVerified(true);
-    } else {
-      setIsVerified(false);
-    }
-  }, [userBalance]);
+  // const { data: userBalance } = useContractRead({
+  //   address: oemAddress,
+  //   abi: abi,
+  //   functionName: "balanceOf",
+  //   args: [address],
+  //   watch: true,
+  // });
+  // const balance: number = Number(userBalance);
+  // useEffect(() => {
+  //   if (balance > 0) {
+  //     setIsVerified(true);
+  //   } else {
+  //     setIsVerified(false);
+  //   }
+  // }, [userBalance]);
   return (
     <Context.Provider
       value={{

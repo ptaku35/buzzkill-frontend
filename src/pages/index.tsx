@@ -378,21 +378,12 @@ export default function Home({ address }: AuthenticatedPageProps) {
         </Container>
 
         {/*ROADMAP*/}
-        <Container>
-          <Flex padding="10rem 10rem 0rem 14rem">
-            <Heading
-              className="heading1"
-              fontSize="8rem"
-              padding="5rem 0rem 5rem 5rem"
-              color="brand.0"
-              textAlign="left"
-            >
-              Roadmap
-            </Heading>
-            <Image src="roadmap.svg" width="100%"></Image>
-          </Flex>
+        <Container fullWidth={true}>
+          <Image src="roadmap.svg" width="100%"></Image>
+        </Container>
 
-          {/* STATS */}
+        {/* STATS */}
+        <Container>
           <Flex
             className={styles.flexContainer}
             padding="10rem 10rem 0rem 10rem"

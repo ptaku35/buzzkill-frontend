@@ -9,21 +9,10 @@ export default function Retailers() {
     <>
       <Layout>
         <Head>
-          <title>Buzzkill Play Game</title>
+          <title>Buzzkill Roadmap</title>
           {/* <meta name="description" content="noindex,nofollow" /> */}
         </Head>
-        <Heading
-          as="h1"
-          fontSize="10rem"
-          color="white "
-          fontWeight="medium"
-          size="lg"
-          p="10rem"
-          textAlign="center"
-        >
-          Roadmap
-        </Heading>
-        <Container>
+        <Container fullWidth={true}>
           <Box
             position="relative"
             width="full"
