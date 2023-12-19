@@ -168,7 +168,7 @@ export default function Header() {
           </Button>
         </Link>
 
-        <Link href="/marketplace" shallow>
+        <Link href="https://dagora.xyz/" shallow>
           <Button
             color="brand.0"
             fontSize="27px"

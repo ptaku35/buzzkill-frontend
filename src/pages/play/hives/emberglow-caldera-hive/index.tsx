@@ -4,7 +4,9 @@ import Head from "next/head";
 import Container from "Components/Container/Container";
 import NextLink from "next/link"; // Import Link from Next.js
 import SemiTransparentBackground from "../../../../Components/SemiTransparentBackground"; // Import your custom component
-import { CSSProperties } from "react"; // Import CSSProperties from React
+import MapTriangle from "Components/MapTriangle/MapTriangle";
+import { CSSProperties, useEffect, useState } from "react"; // Import CSSProperties from React
+import { useRouter } from "next/router";
 
 export default function EmberglowCalderaHive() {
   const overlayImageStyles: ImageProps = {
@@ -33,6 +35,49 @@ export default function EmberglowCalderaHive() {
     backgroundColor: "brand.50", // Directly use the color token from the theme
     opacity: 0.5, // Adjust the opacity as needed
     zIndex: 2, // Make sure this is above the main image
+  };
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const handleRouteChangeStart = () => {
+      setIsLoading(true);
+    };
+
+    const handleRouteChangeComplete = () => {
+      setIsLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
+    };
+  }, [router]);
+
+  const handleClick = (hiveName: string) => {
+    switch (hiveName) {
+      case "Ash Hive":
+        router.push(`/play/hives/emberglow-caldera-hive/ash-hive`);
+        break;
+      case "Sunlit Sands Hive":
+        router.push(`/play/hives/sunlit-sands-hive`);
+        break;
+      case "Verdant Canopy Hive":
+        router.push(`/play/hives/verdant-canopy-hive`);
+        break;
+      case "Azure Marina Hive":
+        router.push(`/play/hives/azure-marina-hive`);
+        break;
+      case "Frostwing Glacier Hive":
+        router.push(`/play/hives/frostwing-glacier-hive`);
+        break;
+      default:
+        console.log("Triangle clicked!");
+        break;
+    }
   };
 
   return (
@@ -68,10 +113,18 @@ export default function EmberglowCalderaHive() {
                 textAlign="center" // Center the text
                 zIndex={3} // Set the z-index higher than the image and SemiTransparentBackground
               >
-                Emberglow Caldera Hive
+                Emberglow Caldera
               </Heading>
             </Box>
           </SemiTransparentBackground>
+          {/* Overlay triangles */}
+          <MapTriangle
+            top="25%"
+            left="66%"
+            label="Ash Hive"
+            onClick={() => handleClick("Ash Hive")}
+          />
+          {"Ash Hive"}
 
           {/* Wrap the overlay image with a Link */}
           <NextLink href="/play">

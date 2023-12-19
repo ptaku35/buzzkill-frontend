@@ -4,7 +4,7 @@ import Head from "next/head";
 import { Box, Flex, Heading, Image } from "@chakra-ui/react";
 import Container from "Components/Container/Container";
 
-export default function Retailers() {
+export default function Roadmap() {
   return (
     <>
       <Layout>
