@@ -8,7 +8,7 @@ import MapTriangle from "Components/MapTriangle/MapTriangle";
 import { CSSProperties, useEffect, useState } from "react"; // Import CSSProperties from React
 import { useRouter } from "next/router";
 
-export default function EmberglowCalderaHive() {
+export default function EmberglowCaldera() {
   const overlayImageStyles: ImageProps = {
     position: "absolute",
     top: "15%",

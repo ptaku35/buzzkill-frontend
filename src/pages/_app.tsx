@@ -40,6 +40,7 @@ import "@fontsource/roboto/700.css";
 import "../styles/globals.css";
 
 import { Session } from "next-auth";
+import { LoadingProvider } from "contexts/LoadingContext";
 
 const walletConnectProjectId: string | undefined =
   process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
@@ -99,7 +100,9 @@ function MyApp({
             chains={chains}
           >
             <AppStateProvider>
-              <Component {...pageProps} />
+              <LoadingProvider>
+                <Component {...pageProps} />
+              </LoadingProvider>
             </AppStateProvider>
           </RainbowKitProvider>
         </SessionProvider>

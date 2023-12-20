@@ -2,34 +2,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import MapTriangle from "Components/MapTriangle/MapTriangle";
-import { RingLoader } from "react-spinners"; // Import RingLoader component
 import { Box } from "@chakra-ui/react";
 import GameLayout from "Components/GameLayout/GameLayout";
 import useMeasureHeight from "../../hooks/useMeasureHeight";
+import { useLoading } from "../../contexts/LoadingContext";
 
 export default function Play() {
   const router = useRouter();
   const { ref, headerHeight } = useMeasureHeight();
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const handleRouteChangeStart = () => {
-      setIsLoading(true);
-    };
-
-    const handleRouteChangeComplete = () => {
-      setIsLoading(false);
-    };
-
-    router.events.on("routeChangeStart", handleRouteChangeStart);
-    router.events.on("routeChangeComplete", handleRouteChangeComplete);
-
-    return () => {
-      router.events.off("routeChangeStart", handleRouteChangeStart);
-      router.events.off("routeChangeComplete", handleRouteChangeComplete);
-    };
-  }, [router]);
+  const { isLoading } = useLoading();
 
   const handleClick = (hiveName: string) => {
     switch (hiveName) {
@@ -123,23 +105,6 @@ export default function Play() {
             />
           </Box>
           {/* Loading Spinner */}
-          {isLoading && (
-            <div
-              style={{
-                position: "fixed",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 9999, // Ensure it's above everything else
-              }}
-            >
-              <RingLoader
-                size={150}
-                color={"#BC8E2D"} // Adjust the color as needed
-                loading={isLoading}
-              />
-            </div>
-          )}
         </>
       )}
     </GameLayout>
