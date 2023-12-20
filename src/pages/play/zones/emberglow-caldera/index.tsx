@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import MapTriangle from "Components/MapTriangle/MapTriangle";
-import { Box } from "@chakra-ui/react";
-import GameLayout from "Components/GameLayout/GameLayout";
+import { Box, Heading } from "@chakra-ui/react";
+import GameLayout from "Components/Layout/GameLayout/GameLayout";
 import useMeasureHeight from "../../../../hooks/useMeasureHeight";
 import { useLoading } from "../../../../contexts/LoadingContext";
 import MapNavigation from "Components/NavigationMap/NavigationMap";
+import SemiTransparentBackground from "Components/SemiTransparentBackground";
 
 export default function EmberglowCaldera() {
   const router = useRouter();
@@ -19,8 +20,8 @@ export default function EmberglowCaldera() {
       case "Ash Hive":
         router.push(`/play/zones/emberglow-caldera/ash-hive`);
         break;
-      case "Sunlit Sands":
-        router.push(`/play/zones/sunlit-sands`);
+      case "Phoenix Hive":
+        router.push(`/play/zones/phoenix-hive`);
         break;
       case "Verdant Canopy":
         router.push(`/play/zones/verdant-canopy`);
@@ -71,6 +72,24 @@ export default function EmberglowCaldera() {
               />
               Your browser does not support the video tag.
             </video>
+            <Box
+              position="absolute"
+              top="6%"
+              left="50%"
+              transform="translateX(-50%)"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              {" "}
+              {/* Adjust the width as needed */}
+              <SemiTransparentBackground>
+                <Heading color="white" padding="2rem 10rem 2rem 10rem">
+                  Emberglow Caldera{" "}
+                </Heading>
+              </SemiTransparentBackground>
+            </Box>
             <MapNavigation
               top="12%"
               left={{ base: "60%", md: "72%" }}
@@ -89,8 +108,8 @@ export default function EmberglowCaldera() {
             <MapTriangle
               top="40%"
               left="72%"
-              label="Emberglow Caldera"
-              onClick={() => handleClick("Emberglow Caldera")}
+              label="Phoenix Hive"
+              onClick={() => handleClick("Phoenix Hive")}
             />
           </Box>
         </>

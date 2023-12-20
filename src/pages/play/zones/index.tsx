@@ -64,6 +64,7 @@ export default function Play() {
             <source src="/volcano-smoke-map.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+
           {/* Overlay triangles */}
           <MapTriangle
             top="80%" // Adjust as needed

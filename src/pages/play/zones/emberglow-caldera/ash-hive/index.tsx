@@ -131,43 +131,51 @@ export default function AshHive() {
         <title>Buzzkill Ash Hive</title>
       </Head>
       <Container fullWidth={true}>
-        <Box position="relative" width="full" height="15vh" overflow="hidden">
+        <Box position="relative" width="full" height="15vh" zIndex={3}>
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
+            backgroundColor="rgba(0, 0, 0, 0.5)"
+            zIndex={2} // Lower than the parent Box but higher than the Image
+          />
           {/* Main Background Image */}
           <Image
             src="/fire-volcano.png"
             alt="Hero Image"
-            position="relative"
-            width="full"
-            height="15vh"
-            overflow="hidden"
+            position="absolute"
+            top="0"
+            left="0"
+            width="100%"
+            height="100%"
             objectFit="cover"
             objectPosition="center center"
-            zIndex={0}
+            zIndex={1}
           />
-          {/* SemiTransparent Background with Text */}
-          <SemiTransparentBackground style={semiTransparentBackgroundStyles}>
-            <Box
-              position="absolute"
-              top="0"
-              left="0"
-              right="0"
-              bottom="0"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            zIndex={2}
+          >
+            <Heading
+              color="white"
+              textAlign="center"
+              zIndex={2}
+              fontSize="10rem"
+              whiteSpace="nowrap"
             >
-              <Heading
-                color="white"
-                textAlign="center"
-                zIndex={3}
-                whiteSpace="nowrap" // Prevent text from wrapping
-                // Optionally, add responsive font size here
-              >
-                Ash Hive
-              </Heading>
-            </Box>
-          </SemiTransparentBackground>
-          {/* back to emberglow caldera */}
+              Ash Hive
+            </Heading>
+          </Box>
+          {/* Back to Emberglow Caldera */}
           <MapNavigation
             top="50%"
             left={{ base: "40%", md: "60%" }}

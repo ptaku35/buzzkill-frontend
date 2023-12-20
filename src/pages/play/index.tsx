@@ -2,16 +2,25 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import MapTriangle from "Components/MapTriangle/MapTriangle";
-import { Box } from "@chakra-ui/react";
-import GameLayout from "Components/GameLayout/GameLayout";
+import { Box, Heading, Icon, Text } from "@chakra-ui/react";
+import GameLayout from "Components/Layout/GameLayout/GameLayout";
 import useMeasureHeight from "../../hooks/useMeasureHeight";
 import { useLoading } from "../../contexts/LoadingContext";
+import SemiTransparentBackground from "Components/SemiTransparentBackground/SemiTransparentBackground";
+import { SlArrowDown } from "react-icons/sl"; // Assuming you use CloseIcon for the hide action
+import HideButton from "Components/HideButton/HideButton";
 
 export default function Play() {
   const router = useRouter();
   const { ref, headerHeight } = useMeasureHeight();
 
   const { isLoading } = useLoading();
+
+  const [isTextVisible, setIsTextVisible] = useState(true);
+
+  const toggleTextVisibility = () => {
+    setIsTextVisible(!isTextVisible);
+  };
 
   const handleClick = (hiveName: string) => {
     switch (hiveName) {
@@ -67,7 +76,64 @@ export default function Play() {
               <source src="/animations/map-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-
+            <Box
+              position="absolute"
+              top="5%"
+              left="50%"
+              transform="translateX(-50%)"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              {" "}
+              {/* Adjust the width as needed */}
+              <SemiTransparentBackground>
+                <Heading color="white" padding="2rem 10rem 2rem 10rem">
+                  {" "}
+                  World Map
+                </Heading>
+              </SemiTransparentBackground>
+            </Box>
+            <Box
+              position="absolute"
+              top="5%"
+              left="19%"
+              transform="translateX(-50%)"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <SemiTransparentBackground opacity={0.4}>
+                <Box position="relative" padding="0rem 1rem 0rem 1rem">
+                  <HideButton
+                    onClick={toggleTextVisibility}
+                    isRotated={!isTextVisible}
+                  />
+                  <Heading color="white" padding="2rem 20rem 2rem 20rem">
+                    How To Play
+                  </Heading>
+                  {isTextVisible && (
+                    <Text
+                      fontSize="2rem"
+                      color="white"
+                      padding="2rem 5rem 2rem 5rem"
+                      textAlign="left"
+                    >
+                      1. Explore the world to find your ideal environment
+                      <br />
+                      2. Stake your bees and join the Tribe
+                      <br />
+                      3. Collect resources to develop your hive
+                      <br />
+                      4. Raid other hives to steal precious honey
+                      <br />
+                    </Text>
+                  )}
+                </Box>
+              </SemiTransparentBackground>
+            </Box>
             {/* Overlay triangles */}
             <MapTriangle
               top="90%"

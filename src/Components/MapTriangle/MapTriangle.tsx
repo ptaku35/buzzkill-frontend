@@ -8,6 +8,9 @@ interface MapTriangleProps {
   left: string; // Position from left
   label: string; // Tooltip text
   onClick: () => void; // Click event handler
+  bgColor?: string; // Optional background color prop
+  textColor?: string;
+  opacity?: number; // optional opacity
 }
 
 // Define the keyframes for the dancing animation
@@ -22,7 +25,12 @@ const MapTriangle: React.FC<MapTriangleProps> = ({
   left,
   label,
   onClick,
+  bgColor = "yellow.300", // Default background color if not provided
+  textColor = "yellow.600", // defualt color for text
+  opacity = 0.5, // defualt opacity vaue
 }) => {
+  const rgbaBgColor = hexToRgba(bgColor, opacity); // Convert hex color to RGBA with opacity
+
   // Update this clipPath to create the desired hexagonal shape
   const triangleClipPath = `
   polygon(
@@ -52,11 +60,11 @@ const MapTriangle: React.FC<MapTriangleProps> = ({
         label={label}
         hasArrow={false}
         placement="bottom"
-        bg="yellow.300"
-        color="yellow.600"
+        bg={bgColor}
+        color={textColor}
         py={3}
         px={5}
-        mt="-70px"
+        mt="-90px"
         borderRadius="lg"
         boxShadow="none"
         fontSize="lg"
@@ -65,7 +73,7 @@ const MapTriangle: React.FC<MapTriangleProps> = ({
           as="button"
           w="50px"
           h="80px" // Adjust height to match the hexagonal aspect ratio
-          bg="yellow.300"
+          bg={bgColor}
           borderRadius="4px" // Adjust this for slight rounding of the corners
           clipPath={triangleClipPath} // Apply the hexagonal clip path
           animation={`${dancingAnimation} 3s ease-in-out infinite`}
@@ -80,3 +88,16 @@ const MapTriangle: React.FC<MapTriangleProps> = ({
 };
 
 export default MapTriangle;
+
+function hexToRgba(hex: string, opacity: number): string {
+  hex = hex.replace("#", "");
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+}
+
+
+
+
+

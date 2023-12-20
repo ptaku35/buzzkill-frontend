@@ -1,6 +1,6 @@
 // src/components/LoadingSpinner/index.tsx
 import React from "react";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import { useLoading } from "../../contexts/LoadingContext";
 
 const GameSpinner: React.FC = () => {
@@ -23,7 +23,7 @@ const GameSpinner: React.FC = () => {
         zIndex: 9999,
       }}
     >
-      <BounceLoader size={100} color={"#BC8E2D"} />
+      <HashLoader size={100} color={"#F4CA66"} />
     </div>
   );
 };

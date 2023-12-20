@@ -52,7 +52,7 @@ const MapNavigation: React.FC<MapNavigationProps> = ({
     zIndex: 3,
     opacity: 0, // Start invisible
     transition: "opacity 0.3s ease-in-out",
-    padding: "5px",
+    padding: "3rem",
   };
 
   const backgroundStyles: React.CSSProperties = {
