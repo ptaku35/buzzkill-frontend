@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Layout from "../../Components/Layout/Layout";
 import Head from "next/head";
-import Container from "Components/Container/Container";
 import MapTriangle from "Components/MapTriangle/MapTriangle";
 import { RingLoader } from "react-spinners"; // Import RingLoader component
+import { Box } from "@chakra-ui/react";
+import GameLayout from "Components/GameLayout/GameLayout";
+import useMeasureHeight from "../../hooks/useMeasureHeight";
 
 export default function Play() {
   const router = useRouter();
+  const { ref, headerHeight } = useMeasureHeight();
+
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -30,20 +33,20 @@ export default function Play() {
 
   const handleClick = (hiveName: string) => {
     switch (hiveName) {
-      case "Emberglow Caldera Hive":
-        router.push(`/play/hives/emberglow-caldera-hive`);
+      case "Emberglow Caldera":
+        router.push(`/play/zones/emberglow-caldera`);
         break;
-      case "Sunlit Sands Hive":
-        router.push(`/play/hives/sunlit-sands-hive`);
+      case "Sunlit Sands":
+        router.push(`/play/zones/sunlit-sands`);
         break;
-      case "Verdant Canopy Hive":
-        router.push(`/play/hives/verdant-canopy-hive`);
+      case "Verdant Canopy":
+        router.push(`/play/zones/verdant-canopy`);
         break;
-      case "Azure Marina Hive":
-        router.push(`/play/hives/azure-marina-hive`);
+      case "Azure Marina":
+        router.push(`/play/zones/azure-marina`);
         break;
-      case "Frostwing Glacier Hive":
-        router.push(`/play/hives/frostwing-glacier-hive`);
+      case "Frostwing Glacier":
+        router.push(`/play/zones/frostwing-glacier`);
         break;
       default:
         console.log("Triangle clicked!");
@@ -52,91 +55,93 @@ export default function Play() {
   };
 
   return (
-    <Layout>
-      <Head>
-        <title>Buzzkill Play Game</title>
-      </Head>
-      <Container fullWidth={true}>
-        <div
-          style={{ cursor: isLoading ? "none" : "auto" }} // Hide the cursor when loading, show it otherwise
-        >
-          {/* Main Image */}
-          <video
-            width="100%"
-            height="auto"
-            autoPlay
-            loop
-            muted
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: "100%",
-            }}
+    <GameLayout>
+      {(headerHeight: number) => (
+        <>
+          <Head>
+            <title>Buzzkill Play Game</title>
+          </Head>
+          <Box
+            cursor={isLoading ? "none" : "auto"}
+            w="full" // Full width relative to the parent element
+            h={`calc(100vh - ${headerHeight}px)`}
+            position="relative"
+            sx={{ boxSizing: "border-box" }} // Ensures padding and borders are included in the width/height
           >
-            <source src="/animations/map-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            {/* Main Image */}
+            <video
+              autoPlay
+              loop
+              muted
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+                position: "absolute", // Position it absolutely to cover the whole container
+                top: 0,
+                left: 0,
+              }}
+            >
+              <source src="/animations/map-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
-          {/* Overlay triangles */}
-          <MapTriangle
-            top="70%"
-            left="75%"
-            label="Sunlit Sands Hive"
-            onClick={() => handleClick("Sunlit Sands Hive")}
-          />
-          {"Sunlit Sands Hive"}
-
-          <MapTriangle
-            top="20%"
-            left="82%"
-            label="Emberglow Caldera Hive"
-            onClick={() => handleClick("Emberglow Caldera Hive")}
-          />
-          {"Emberglow Caldera Hive"}
-
-          <MapTriangle
-            top="70%"
-            left="30%"
-            label="Verdant Canopy Hive"
-            onClick={() => handleClick("Verdant Canopy Hive")}
-          />
-          {"Verdant Canopy Hive"}
-
-          <MapTriangle
-            top="80%"
-            left="10%"
-            label="Azure Marina Hive"
-            onClick={() => handleClick("Azure Marina Hive")}
-          />
-          {"Azure Marina Hive"}
-
-          <MapTriangle
-            top="35%"
-            left="65%"
-            label="Frostwing Glacier Hive"
-            onClick={() => handleClick("Frostwing Glacier Hive")}
-          />
-          {"Frostwing Glacier Hive"}
-        </div>
-        {/* Loading Spinner */}
-        {isLoading && (
-          <div
-            style={{
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 9999, // Ensure it's above everything else
-            }}
-          >
-            <RingLoader
-              size={150}
-              color={"#BC8E2D"} // Adjust the color as needed
-              loading={isLoading}
+            {/* Overlay triangles */}
+            <MapTriangle
+              top="90%"
+              left="75%"
+              label="Sunlit Sands"
+              onClick={() => handleClick("Sunlit Sands")}
             />
-          </div>
-        )}
-      </Container>
-    </Layout>
+
+            <MapTriangle
+              top="12%"
+              left="82%"
+              label="Emberglow Caldera"
+              onClick={() => handleClick("Emberglow Caldera")}
+            />
+
+            <MapTriangle
+              top="70%"
+              left="30%"
+              label="Verdant Canopy"
+              onClick={() => handleClick("Verdant Canopy")}
+            />
+
+            <MapTriangle
+              top="80%"
+              left="10%"
+              label="Azure Marina"
+              onClick={() => handleClick("Azure Marina")}
+            />
+
+            <MapTriangle
+              top="35%"
+              left="67%"
+              label="Frostwing Glacier"
+              onClick={() => handleClick("Frostwing Glacier")}
+            />
+          </Box>
+          {/* Loading Spinner */}
+          {isLoading && (
+            <div
+              style={{
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 9999, // Ensure it's above everything else
+              }}
+            >
+              <RingLoader
+                size={150}
+                color={"#BC8E2D"} // Adjust the color as needed
+                loading={isLoading}
+              />
+            </div>
+          )}
+        </>
+      )}
+    </GameLayout>
   );
 }
