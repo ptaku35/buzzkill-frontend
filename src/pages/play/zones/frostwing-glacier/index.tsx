@@ -1,56 +1,120 @@
-import { Box, Image, ImageProps } from "@chakra-ui/react";
-import Layout from "../../../../Components/Layout/Layout";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
-import Container from "Components/Container/Container";
-import NextLink from "next/link"; // Import Link from Next.js
+import MapTriangle from "Components/MapTriangle/MapTriangle";
+import { Box, Heading } from "@chakra-ui/react";
+import GameLayout from "Components/Layout/GameLayout/GameLayout";
+import useMeasureHeight from "../../../../hooks/useMeasureHeight";
+import { useLoading } from "../../../../contexts/LoadingContext";
+import MapNavigation from "Components/NavigationMap/NavigationMap";
+import SemiTransparentBackground from "Components/SemiTransparentBackground";
 
-export default function EmberglowCaldera() {
-  const overlayImageStyles: ImageProps = {
-    position: "absolute",
-    top: "-30%",
-    left: "60%",
-    width: "50%", // Adjust the width to make the overlay image smaller
-    height: "auto", // Maintain aspect ratio
-    objectFit: "cover" as ImageProps["objectFit"], // Explicitly specify the type
-    transform: "scale(0.2)", // Initial scale
-    zIndex: 2, // Set the z-index to 2 for the overlay image to place it on top
-    transition: "transform 0.3s ease-in-out", // Add a transition effect for the hover effect
-  };
+export default function FrostwingGlacier() {
+  const router = useRouter();
+  const { ref, headerHeight } = useMeasureHeight();
 
-  const overlayImageHoverStyles = {
-    transform: "scale(0.25)", // Scale up on hover (adjust as needed, e.g., 0.25 for a smaller effect)
+  const { isLoading } = useLoading();
+
+  const handleClick = (hiveName: string) => {
+    switch (hiveName) {
+      case "Ash Hive":
+        router.push(`/play/zones/emberglow-caldera/ash-hive`);
+        break;
+      case "Phoenix Hive":
+        router.push(`/play/zones/phoenix-hive`);
+        break;
+      case "Verdant Canopy":
+        router.push(`/play/zones/verdant-canopy`);
+        break;
+      case "Azure Marina":
+        router.push(`/play/zones/azure-marina`);
+        break;
+      case "Frostwing Glacier":
+        router.push(`/play/zones/frostwing-glacier`);
+        break;
+      default:
+        console.log("Triangle clicked!");
+        break;
+    }
   };
 
   return (
-    <Layout>
-      <Head>
-        <title>Buzzkill - Frostwing Glacier</title>
-      </Head>
-      <Container fullWidth={true}>
-        <Box position="relative" width="full" height="88vh" overflow="hidden">
-          {/* Main Image */}
-          <Image
-            src="/ice.webp"
-            alt="Hero Image"
-            borderRadius="0px"
-            width="full"
-            height="85vh"
-            objectFit="cover"
-            objectPosition="center center"
-            zIndex={1} // Set the z-index to 1 for the main image
-          />
-
-          {/* Wrap the overlay image with a Link */}
-          <NextLink href="/play">
-            <Image
-              src="/small-map-distorted.svg"
-              alt="Overlay Image"
-              _hover={overlayImageHoverStyles}
-              {...overlayImageStyles}
+    <GameLayout>
+      {(headerHeight: number) => (
+        <>
+          <Head>
+            <title>Buzzkill FrostWing Glacier</title>
+          </Head>
+          <Box
+            cursor={isLoading ? "none" : "auto"}
+            w="full" // Full width relative to the parent element
+            h={`calc(100vh - ${headerHeight}px)`}
+            position="relative"
+            sx={{ boxSizing: "border-box" }} // Ensures padding and borders are included in the width/height
+          >
+            {/* Main Image */}
+            <video
+              autoPlay
+              loop
+              muted
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+                position: "absolute", // Position it absolutely to cover the whole container
+                top: 0,
+                left: 0,
+              }}
+            >
+              <source src="/animations/ice.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <Box
+              position="absolute"
+              top="6%"
+              left="50%"
+              transform="translateX(-50%)"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              {" "}
+              {/* Adjust the width as needed */}
+              <SemiTransparentBackground>
+                <Heading color="white" padding="2rem 10rem 2rem 10rem">
+                  Frostwing Glacier{" "}
+                </Heading>
+              </SemiTransparentBackground>
+            </Box>
+            <MapNavigation
+              top="12%"
+              left={{ base: "60%", md: "72%" }}
+              href="/play"
+              imageSrc="/small-map.svg"
+              navigationLabel="Back to Map"
             />
-          </NextLink>
-        </Box>
-      </Container>
-    </Layout>
+            {/* Overlay triangles */}
+            <MapTriangle
+              top="50%"
+              left="25%"
+              label="Snowdrift Hive"
+              onClick={() => handleClick("Snowdrift Hive")}
+              bgColor="#BC8E2D"
+              textColor="white"
+            />
+
+            <MapTriangle
+              top="45%"
+              left="74%"
+              label="Blizzard Hive"
+              onClick={() => handleClick("Blizzard Hive")}
+              bgColor="#BC8E2D"
+              textColor="white"
+            />
+          </Box>
+        </>
+      )}
+    </GameLayout>
   );
 }

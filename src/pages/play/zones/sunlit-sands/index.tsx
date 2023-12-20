@@ -17,11 +17,11 @@ export default function EmberglowCaldera() {
 
   const handleClick = (hiveName: string) => {
     switch (hiveName) {
-      case "Ash Hive":
-        router.push(`/play/zones/emberglow-caldera/ash-hive`);
+      case "Dunespire Hive":
+        router.push(`/play/zones/emberglow-caldera/dunespire-hive`);
         break;
-      case "Phoenix Hive":
-        router.push(`/play/zones/phoenix-hive`);
+      case "Sunscorch  Hive":
+        router.push(`/play/zones/sunscorch-hive`);
         break;
       case "Verdant Canopy":
         router.push(`/play/zones/verdant-canopy`);
@@ -98,8 +98,8 @@ export default function EmberglowCaldera() {
             <MapTriangle
               top="50%"
               left="25%"
-              label="Ash Hive"
-              onClick={() => handleClick("Ash Hive")}
+              label="Dunespire Hive"
+              onClick={() => handleClick("Dunespire Hive")}
               bgColor="#4D3092"
               textColor="white"
             />
@@ -107,8 +107,8 @@ export default function EmberglowCaldera() {
             <MapTriangle
               top="40%"
               left="79%"
-              label="Phoenix Hive"
-              onClick={() => handleClick("Phoenix Hive")}
+              label="Sunscorch Hive"
+              onClick={() => handleClick("Sunscorch Hive")}
               bgColor="#4D3092"
               textColor="white"
             />
