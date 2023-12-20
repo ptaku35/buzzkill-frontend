@@ -172,14 +172,16 @@ export default function AshHive() {
             top="50%"
             left={{ base: "40%", md: "60%" }}
             href="/play/zones/emberglow-caldera"
-            imageSrc="/emberglow-map.svg"
+            imageSrc="/emberglow-map-small.svg"
+            navigationLabel="Emberglow Caldera"
           />
           {/* Back to Main Map */}
           <MapNavigation
             top="50%"
             left={{ base: "60%", md: "70%" }}
             href="/play"
-            imageSrc="/small-map-distorted.svg"
+            imageSrc="/small-map.svg"
+            navigationLabel="Main Map"
           />
         </Box>
       </Container>

@@ -1,14 +1,17 @@
 // src/components/LoadingSpinner/index.tsx
 import React from "react";
-import { RingLoader } from "react-spinners";
+import { BounceLoader } from "react-spinners";
 import { useLoading } from "../../contexts/LoadingContext";
 
 const GameSpinner: React.FC = () => {
   const { isLoading } = useLoading();
 
   if (!isLoading) {
+    console.log("not Loading");
     return null;
-  } 
+  } else {
+    console.log("isLoading i nspinner");
+  }
 
   return (
     <div
@@ -20,7 +23,7 @@ const GameSpinner: React.FC = () => {
         zIndex: 9999,
       }}
     >
-      <RingLoader size={150} color={"#BC8E2D"} />
+      <BounceLoader size={100} color={"#BC8E2D"} />
     </div>
   );
 };

@@ -75,7 +75,8 @@ export default function EmberglowCaldera() {
               top="12%"
               left={{ base: "60%", md: "72%" }}
               href="/play"
-              imageSrc="/small-map-distorted.svg"
+              imageSrc="/small-map.svg"
+              navigationLabel="Back to Map"
             />
             {/* Overlay triangles */}
             <MapTriangle
@@ -92,7 +93,6 @@ export default function EmberglowCaldera() {
               onClick={() => handleClick("Emberglow Caldera")}
             />
           </Box>
-          {/* Loading Spinner */}
         </>
       )}
     </GameLayout>

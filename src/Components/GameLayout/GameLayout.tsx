@@ -20,6 +20,7 @@ export default function GameLayout({ children }: GameLayoutProps) {
   const { isLoading, setIsLoading } = useLoading();
 
   useEffect(() => {
+    console.log("Inside useEffect");
     const handleRouteChangeStart = () => {
       setIsLoading(true);
       console.log("Route change started - isLoading set to true");

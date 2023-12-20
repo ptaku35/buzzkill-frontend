@@ -1,0 +1,22 @@
+.imageStyle {
+  position: absolute;
+  transition: transform 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.labelStyle {
+  display: none; /* Initially hidden */
+  color: white;
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  /* Additional styles can be added here */
+}
+
+.labelVisible {
+  display: block;
+}
+
+.hoverEffect {
+  transform: translateY(-50%) scale(0.22);
+}
