@@ -107,7 +107,7 @@ export default function Header() {
           <Button
             color="brand.0"
             fontWeight="normal"
-            fontSize="27px"
+            fontSize="22px"
             _hover={{
               borderColor: "brand.50",
               borderBottomWidth: "2px",
@@ -122,7 +122,7 @@ export default function Header() {
         <Link href="/gallery" shallow>
           <Button
             color="brand.0"
-            fontSize="27px"
+            fontSize="22px"
             fontWeight="normal"
             aria-current="page"
             _hover={{
@@ -138,7 +138,7 @@ export default function Header() {
         <Link href="/gameplay" shallow>
           <Button
             color="brand.0"
-            fontSize="27px"
+            fontSize="22px"
             fontWeight="normal"
             aria-current="page"
             _hover={{
@@ -155,7 +155,7 @@ export default function Header() {
         <Link href="/roadmap" shallow>
           <Button
             color="brand.0"
-            fontSize="27px"
+            fontSize="22px"
             fontWeight="normal"
             _hover={{
               borderColor: "brand.50",
@@ -171,7 +171,7 @@ export default function Header() {
         <Link href="https://dagora.xyz/" shallow>
           <Button
             color="brand.0"
-            fontSize="27px"
+            fontSize="22px"
             fontWeight="normal"
             _hover={{
               borderColor: "brand.50",
@@ -193,7 +193,7 @@ export default function Header() {
           <Button
             color="brand.0"
             fontWeight="normal"
-            fontSize="27px"
+            fontSize="22px"
             _hover={{
               borderColor: "brand.1100",
               borderBottomWidth: "2px",
@@ -206,7 +206,7 @@ export default function Header() {
         </Link>
       </ButtonGroup>
       <Spacer></Spacer>
-      <Flex fontSize="21px">
+      <Flex fontSize="17px">
         <ConnectButton
           showBalance={{
             smallScreen: false,
