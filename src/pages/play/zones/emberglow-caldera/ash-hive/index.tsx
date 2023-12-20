@@ -14,7 +14,9 @@ import {
   VStack,
   HStack,
 } from "@chakra-ui/react";
-import SemiTransparentBackground from "../../../../../Components/SemiTransparentBackground"; // Import your custom component
+import SemiTransparentBackground from "../../../../../Components/SemiTransparentBackground";
+import MapNavigation from "Components/NavigationMap/NavigationMap";
+
 import {
   useAccount,
   useContractRead,
@@ -113,38 +115,6 @@ export default function AshHive() {
     zIndex: 2, // Make sure this is above the main image
   };
 
-  const overlayImageStyles: ImageProps = {
-    position: "absolute",
-    top: "50%",
-    left: { base: "60%", md: "70%" }, // Adjusts position at base and md breakpoints
-    transform: {
-      base: "translateY(-50%) scale(0.15)", // Smaller scale for smaller screens
-      md: "translateY(-50%) scale(0.2)", // Larger scale for medium screens and up
-    },
-    width: { base: "10w", md: "40vw" }, // Smaller width on smaller screens, larger on medium and up
-
-    zIndex: 2,
-    transition: "transform 0.3s ease-in-out",
-  };
-  const overlayImageHoverStyles = {
-    transform: "translateY(-50%) scale(0.22)", // Include translateY with a slight increase in scale
-  };
-
-  const overlayImageHiveStyles: ImageProps = {
-    position: "absolute",
-    top: "50%",
-    left: { base: "40%", md: "60%" }, // Adjusts position at base and md breakpoints
-    transform: {
-      base: "translateY(-50%) scale(0.15)", // Smaller scale for smaller screens
-      md: "translateY(-50%) scale(0.2)", // Larger scale for medium screens and up
-    },
-    width: { base: "10vw", md: "40vw" }, // Smaller width on smaller screens, larger on medium and up
-    zIndex: 2,
-    transition: "transform 0.3s ease-in-out",
-  };
-  const overlayImageHiveHoverStyles = {
-    transform: "translateY(-50%) scale(0.22)", // Include translateY with a slight increase in scale
-  };
   const handleStakeButtonClick = () => {
     if (!isApproved) {
       console.log("approva all state");
@@ -198,23 +168,19 @@ export default function AshHive() {
             </Box>
           </SemiTransparentBackground>
           {/* back to emberglow caldera */}
-          <Link href="/play/hives/emberglow-caldera-hive">
-            <Image
-              src="/emberglow-map.svg"
-              alt="Overlay Image"
-              _hover={overlayImageHiveHoverStyles}
-              {...overlayImageHiveStyles}
-            />
-          </Link>
-          q {/* Back to Main Map */}
-          <Link href="/play">
-            <Image
-              src="/small-map-distorted.svg"
-              alt="Overlay Image"
-              _hover={overlayImageHoverStyles}
-              {...overlayImageStyles}
-            />
-          </Link>
+          <MapNavigation
+            top="50%"
+            left={{ base: "40%", md: "60%" }}
+            href="/play/zones/emberglow-caldera"
+            imageSrc="/emberglow-map.svg"
+          />
+          {/* Back to Main Map */}
+          <MapNavigation
+            top="50%"
+            left={{ base: "60%", md: "70%" }}
+            href="/play"
+            imageSrc="/small-map-distorted.svg"
+          />
         </Box>
       </Container>
       {/* HIVE CAPACITY */}
