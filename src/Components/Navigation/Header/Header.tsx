@@ -135,7 +135,7 @@ export default function Header() {
             Gallery
           </Button>
         </Link>
-        <Link href="/gameplay" shallow>
+        <Link href="/mint" shallow>
           <Button
             color="brand.0"
             fontSize="27px"
@@ -148,7 +148,7 @@ export default function Header() {
               transition: "ease-in-out 0.2s",
             }}
           >
-            Gameplay
+            Mint
           </Button>
         </Link>
 
