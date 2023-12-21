@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -9,35 +9,50 @@ import {
   Button,
   HStack,
   Text,
+  useToast, // Import useToast
 } from "@chakra-ui/react";
 
 interface ResourceModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+  resource: string;
   contentText: string;
-  children: React.ReactNode;
 }
 
 const ResourceModal: React.FC<ResourceModalProps> = ({
   isOpen,
   onClose,
   title,
+  resource,
   contentText,
-  children,
 }) => {
+  const [foragingText, setForagingText] = useState("");
+  const toast = useToast(); // Initialize useToast
+
   const handleClick = () => {
-    <Text>I'm Foraging!!!</Text>;
+    setForagingText(`You are already foraging for ${resource}`);
+    onClose();
+
+    // Display a toast message
+    toast({
+      title: "Success",
+      description: `Now foraging for  ${resource}`,
+      status: "success",
+      duration: 3000, // Duration in milliseconds
+      isClosable: true,
+    });
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent
         borderRadius="2rem"
         minW="40rem"
-        minH="40rem" // minimum height
-        padding="20px" // padding inside the modal
-        overflowY="auto" // enable vertical scrolling if
+        minH="40rem"
+        padding="20px"
+        overflowY="auto"
         margin="auto"
         transform="translate(-50%, -50%)"
         top="40%"
@@ -45,17 +60,24 @@ const ResourceModal: React.FC<ResourceModalProps> = ({
         position="absolute"
         bg="brand.60"
       >
-        ``
-        <ModalHeader fontSize="4rem" textColor="white">{title}</ModalHeader>
+        <ModalHeader fontSize="4rem" textColor="white">
+          {title}
+        </ModalHeader>
         <ModalCloseButton
-          color="white" // Set your desired color
+          color="white"
           position="absolute"
-          right="2.2rem" // Adjust these values as needed
+          right="2.2rem"
           top="2.2rem"
-          fontSize="lg" // Adjust font size if needed
+          fontSize="lg"
         />
-        <Text fontSize="4rem" color="white">{contentText}</Text>
-        <ModalBody>{children}</ModalBody>
+        <ModalBody>
+          <Text fontSize="2rem" color="white" paddingBottom="2rem">
+            {contentText}
+          </Text>
+          <Text fontSize="2rem" color="white">
+            {foragingText}
+          </Text>
+        </ModalBody>
         <HStack spacing={4} justifyContent="center">
           <Button textAlign="center" onClick={onClose}>
             Later

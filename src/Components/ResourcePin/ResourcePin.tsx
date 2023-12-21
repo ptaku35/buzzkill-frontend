@@ -8,6 +8,7 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { sapConfig, nectarConfig, pollenConfig } from "./ResourcePinConfigs"; // Import configuration objects
 
 import styles from "./ResourcePin.module.css";
 
@@ -25,16 +26,20 @@ interface ResourcePinProps {
   top: ResponsiveStyle;
   left: ResponsiveStyle;
   onClick: () => void; // Click event handler
-  imageSrc: string;
-  navigationLabel: string; // New prop for the navigation label
+  config: {
+    title: string;
+    resource: string;
+    contentText: string;
+    imageSrc: string;
+    navigationLabel: string;
+  }; // Use a config prop for the resource pin configuration
 }
 
 const ResourcePin: React.FC<ResourcePinProps> = ({
   top,
   left,
   onClick,
-  imageSrc,
-  navigationLabel,
+  config, // Use the config prop
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -93,7 +98,7 @@ const ResourcePin: React.FC<ResourcePinProps> = ({
       width={{ base: "4vw", md: "4vw" }}
     >
       <Tooltip
-        label={navigationLabel}
+        label={config.navigationLabel}
         hasArrow={false}
         placement="bottom"
         py={3}
@@ -111,7 +116,7 @@ const ResourcePin: React.FC<ResourcePinProps> = ({
           onClick={onClick}
         >
           <Image
-            src={imageSrc}
+            src={config.imageSrc} // Use image source from config
             alt="Overlay Image"
             width="100%" // Make the Image fill the Box
           />

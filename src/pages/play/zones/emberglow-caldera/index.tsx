@@ -9,17 +9,47 @@ import { useLoading } from "../../../../contexts/LoadingContext";
 import MapNavigation from "Components/NavigationMap/NavigationMap";
 import SemiTransparentBackground from "Components/SemiTransparentBackground";
 import ResourcePin from "Components/ResourcePin/ResourcePin";
-import ResourceModal from "Components/ResourceModal"; // Adjust the import path as needed
+import ResourceModal from "Components/ResourceModal";
+import {
+  sapConfig,
+  pollenConfig,
+  nectarConfig,
+} from "Components/ResourcePin/ResourcePinConfigs";
 
 export default function EmberglowCaldera() {
   const router = useRouter();
   const { ref, headerHeight } = useMeasureHeight();
 
   const { isLoading } = useLoading();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({
+    title: "",
+    resource: "",
+    contentText: "",
+  });
+
+  const [selectedConfig, setSelectedConfig] =
+    useState<ResourcePinConfig | null>(null);
+
+  const handleResourcePinClick = (config: ResourcePinConfig) => {
+    // Set the selected configuration when a pin is clicked
+    setSelectedConfig(config);
+  };
+
+  const handleCloseModal = () => {
+    // Close the modal and reset the selected configuration
+    setSelectedConfig(null);
+  };
+
+  const openModal = (title: string, resource: string, contentText: string) => {
+    setModalContent({ title, resource, contentText });
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleClick = (hiveName: string) => {
     switch (hiveName) {
@@ -104,13 +134,41 @@ export default function EmberglowCaldera() {
               navigationLabel="Back to Map"
             />
             {/* ResourcePin Sap */}
+
             <ResourcePin
               top="50%"
               left={{ base: "50%", md: "52%" }}
-              onClick={openModal}
-              imageSrc="/icons/resources/sap.svg"
-              navigationLabel="Forage Sap"
+              config={sapConfig}
+              onClick={() => handleResourcePinClick(sapConfig)}
             />
+            <ResourcePin
+              top="30%"
+              left={{ base: "40%", md: "42%" }}
+              config={sapConfig}
+              onClick={() => handleResourcePinClick(sapConfig)}
+            />
+
+            <ResourcePin
+              top="60%"
+              left={{ base: "30%", md: "32%" }}
+              config={pollenConfig}
+              onClick={() => handleResourcePinClick(pollenConfig)}
+            />
+
+            <ResourcePin
+              top="55%"
+              left={{ base: "70%", md: "72%" }}
+              config={pollenConfig}
+              onClick={() => handleResourcePinClick(pollenConfig)}
+            />
+
+            <ResourcePin
+              top="40%"
+              left={{ base: "52%", md: "55%" }}
+              config={nectarConfig}
+              onClick={() => handleResourcePinClick(nectarConfig)}
+            />
+
             {/* Overlay triangles */}
             <MapTriangle
               top="26%"
@@ -126,13 +184,16 @@ export default function EmberglowCaldera() {
               onClick={() => handleClick("Phoenix Hive")}
             />
 
-            {/* Modal Component */}
-            <ResourceModal
-              isOpen={isModalOpen}
-              onClose={closeModal}
-              title="Resource Details"
-              contentText="hellp"
-            ></ResourceModal>
+            {/* Modal Components */}
+            {selectedConfig && (
+              <ResourceModal
+                isOpen={true} // You can control the modal open state as needed
+                onClose={handleCloseModal}
+                title={selectedConfig.title}
+                resource={selectedConfig.resource}
+                contentText={selectedConfig.contentText}
+              />
+            )}
           </Box>
         </>
       )}
