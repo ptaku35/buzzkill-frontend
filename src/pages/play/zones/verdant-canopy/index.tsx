@@ -38,6 +38,14 @@ export default function FrostwingGlacier() {
     }
   };
 
+  useEffect(() => {
+    // Start loading the video when the page loads
+    const video = document.querySelector("video");
+    if (video) {
+      video.load();
+    }
+  }, []);
+
   return (
     <GameLayout>
       {(headerHeight: number) => (
@@ -65,6 +73,7 @@ export default function FrostwingGlacier() {
                 top: 0,
                 left: 0,
               }}
+              preload="none" // Lazy load the video
             >
               <source src="/Animations/forest.mp4" type="video/mp4" />
               Your browser does not support the video tag.

@@ -29,6 +29,9 @@ import {
 import BuzzkillNFT from "../../../../../assets/BuzzkillNFT.json";
 import HiveVault from "../../../../../assets/HiveVault.json";
 import TomoScanLink from "Components/TomoScanLink";
+import BeeCard from "Components/BeeCard/BeeCard";
+import ImagePlaceHolder from "Components/ImagePlaceHolder";
+
 
 // CONSTANT CONTRACT VARIABLES
 const BuzzkillNFTAbi = BuzzkillNFT;
@@ -460,6 +463,39 @@ export default function AshHive() {
               </Text>
             </Box>
           </HStack>
+          <Container>
+            <HStack spacing="3rem" justify="center">
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={300}
+                forageValue={50}
+              />
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={220}
+                forageValue={50}
+              />
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={210}
+                forageValue={50}
+              />
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={204}
+                forageValue={50}
+              />
+            </HStack>
+          </Container>
+    
           <Button colorScheme="purple" size="md" w="full">
             Show More
           </Button>
