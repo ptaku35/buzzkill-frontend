@@ -6,7 +6,7 @@ import styles from "./GameLayout.module.css";
 import useMeasureHeight from "../../../hooks/useMeasureHeight";
 
 import { useRouter } from "next/router";
-import { LoadingProvider, useLoading } from "../../../contexts/LoadingContext";
+import { useLoading } from "../../../contexts/LoadingContext";
 
 import GameSpinner from "../../GameSpinner";
 

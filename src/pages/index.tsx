@@ -364,7 +364,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
                     padding="5rem 0rem 5rem 0rem" // padding inside the content container
                     align="left"
                   >
-                    Work with members inside your hive to boos your
+                    Work with members inside your hive to boost your
                     productivity, construct buildings and work together to boost
                     your $HONEY production
                   </Text>
