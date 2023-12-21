@@ -160,7 +160,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
             />
             <BeeCard
               imagePath="/Queens/19WD.png"
-              beeName="Sentinel of Shifting Sands"
+              beeName="Sentinel of Sands"
               beeType="Worker Bee"
               beeEnvironment="Desert"
               descriptionText="His armor gleams like the heart of the desert sun, a bastion
@@ -172,7 +172,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
             />
             <BeeCard
               imagePath="/Queens/Q8.png"
-              beeName="Sovereign Syrphidae"
+              beeName="Blizzard Empress"
               beeType="Queen Bee"
               beeEnvironment="Ice"
               descriptionText="Crowned in ice and majesty, her scepter reigns over the silent,

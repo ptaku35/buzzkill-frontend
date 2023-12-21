@@ -13,6 +13,7 @@ import {
   Text,
   VStack,
   HStack,
+  WrapItem,
 } from "@chakra-ui/react";
 import SemiTransparentBackground from "../../../../../Components/SemiTransparentBackground";
 import MapNavigation from "Components/NavigationMap/NavigationMap";
@@ -30,8 +31,8 @@ import BuzzkillNFT from "../../../../../assets/BuzzkillNFT.json";
 import HiveVault from "../../../../../assets/HiveVault.json";
 import TomoScanLink from "Components/TomoScanLink";
 import BeeCard from "Components/BeeCard/BeeCard";
-import ImagePlaceHolder from "Components/ImagePlaceHolder";
-
+import hiveBeesData from "../../../../../assets/data/hiveBees.json";
+import { Bee } from "../../../../../types/BeeTraits";
 
 // CONSTANT CONTRACT VARIABLES
 const BuzzkillNFTAbi = BuzzkillNFT;
@@ -43,8 +44,34 @@ const hiveVaultAddress = process.env
 
 export default function AshHive() {
   const [isApproved, setIsApproved] = useState(false);
-
   const { address, isConnected } = useAccount();
+  const [bees, setBees] = useState<Bee[]>([]); // Use the Bee type for the state
+  const [visibleBees, setVisibleBees] = useState<Bee[]>([]); // Store the currently visible bees
+  const [showMoreClicked, setShowMoreClicked] = useState(false); // Track if the "Show More" button was clicked
+  // State for additional bees
+  const [additionalBees, setAdditionalBees] = useState<Bee[]>([]);
+
+  useEffect(() => {
+    // Use the imported JSON data
+    setBees(hiveBeesData);
+  }, []);
+
+  useEffect(() => {
+    // Initialize the visible bees with the first 4 bees
+    setVisibleBees(bees.slice(0, 4));
+  }, [bees]);
+
+  // Handle the "Show More" button click
+
+  const handleShowMoreClick = () => {
+    const startIndex = visibleBees.length;
+    const endIndex = startIndex + 4; // You can adjust this to load more bees as needed
+    const newAdditionalBees = bees.slice(startIndex, endIndex);
+
+    setAdditionalBees(newAdditionalBees);
+    setShowMoreClicked(true);
+  };
+
   // SETUP CONTRACT READ/WRITE
   // Buzzkill Approval contract read/writes
   // read Approval Status
@@ -117,7 +144,7 @@ export default function AshHive() {
     data: unstakeData,
   } = useContractWrite(unstakingConfig);
 
-   // contract Hive Vault Claim
+  // contract Hive Vault Claim
   const {
     config: claimConfig,
     error: claimError,
@@ -173,12 +200,12 @@ export default function AshHive() {
   // Unstake functionality
   const handleUnstakeButtonClick = () => {
     withdraw?.();
-  }
+  };
 
   // Claim Rewards functionality
   const handleClaimButtonClick = () => {
     claim?.();
-  }
+  };
 
   return (
     <Layout>
@@ -320,7 +347,13 @@ export default function AshHive() {
                 <Button
                   alignSelf="center"
                   onClick={handleStakeButtonClick}
-                  isDisabled={!isConnected || isProcessingApproval || isProcessingStaking || isProcessingUnstaking || isProcessingClaim}
+                  isDisabled={
+                    !isConnected ||
+                    isProcessingApproval ||
+                    isProcessingStaking ||
+                    isProcessingUnstaking ||
+                    isProcessingClaim
+                  }
                 >
                   {" "}
                   {isApproved ? "Stake your Bee" : "Approve your Bee"}
@@ -334,7 +367,13 @@ export default function AshHive() {
                 <Button
                   alignSelf="center"
                   onClick={handleClaimButtonClick}
-                  isDisabled={!isConnected || isProcessingStaking || isProcessingUnstaking || !isApproved || isProcessingClaim}
+                  isDisabled={
+                    !isConnected ||
+                    isProcessingStaking ||
+                    isProcessingUnstaking ||
+                    !isApproved ||
+                    isProcessingClaim
+                  }
                 >
                   CLAIM REWARDS
                 </Button>
@@ -347,24 +386,23 @@ export default function AshHive() {
                 <Button
                   alignSelf="center"
                   onClick={handleUnstakeButtonClick}
-                  isDisabled={!isConnected || isProcessingStaking || isProcessingUnstaking || !isApproved || isProcessingClaim}
+                  isDisabled={
+                    !isConnected ||
+                    isProcessingStaking ||
+                    isProcessingUnstaking ||
+                    !isApproved ||
+                    isProcessingClaim
+                  }
                 >
                   UNSTAKE YOUR BEE
                 </Button>
               </Box>
             </HStack>
             {/* Display TomoScan TX Link */}
-            {stakeData && (
-              <TomoScanLink txHash={stakeData?.hash} />
-            )}
-            {claimData && (
-              <TomoScanLink txHash={claimData?.hash} />
-            )}
-            {unstakeData && (
-              <TomoScanLink txHash={unstakeData?.hash} />
-            )}
+            {stakeData && <TomoScanLink txHash={stakeData?.hash} />}
+            {claimData && <TomoScanLink txHash={claimData?.hash} />}
+            {unstakeData && <TomoScanLink txHash={unstakeData?.hash} />}
           </Container>
-
         </VStack>
       </Container>
 
@@ -409,96 +447,64 @@ export default function AshHive() {
 
       {/* HIVE MEMBERS */}
       <Container>
-        {/* Stack the components vertically */}
         <VStack
           spacing={4} // space between children
           align="stretch" // stretch children to fill the width
           borderRadius="md"
-          p={4}
+          padding="5rem 10rem 5rem 10rem"
         >
-          <Heading textColor="white">Worker Bees Staked</Heading>
-          {/* Horizontal Stack for Honey Monarch and Worker Bee Capacities */}
-          <HStack justify="space-between">
-            {/* Honey Monarch Capacity */}
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/22WD.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #4423
-              </Text>
-            </Box>
+          <Heading
+            padding="5rem 10rem 8rem 10rem"
+            fontSize="6rem"
+            textColor="white"
+          >
+            Worker Bees Staked
+          </Heading>
 
-            {/* Worker Bee Capacity */}
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/14WL.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #223
-              </Text>
-            </Box>
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/18WD.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #413
-              </Text>
-            </Box>
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/19WD.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #113
-              </Text>
-            </Box>
+          {/* Render the visible bees in an HStack */}
+          <HStack spacing="3rem" justify="center" padding="0rem 0rem 5rem 0rem">
+            {visibleBees.map((bee, index) => (
+              <BeeCard
+                key={index}
+                imagePath={bee.imagePath}
+                beeName={bee.beeName}
+                attackValue={bee.attackValue}
+                defenseValue={bee.defenseValue}
+                forageValue={bee.forageValue}
+              />
+            ))}
           </HStack>
-          <Container>
+
+          {/* Render additional bees in a separate HStack */}
+          {additionalBees.length > 0 && (
             <HStack spacing="3rem" justify="center">
-              <BeeCard
-                imagePath="/Queens/19WD.png"
-                beeName="Bee #9876"
-                attackValue={100}
-                defenseValue={300}
-                forageValue={50}
-              />
-              <BeeCard
-                imagePath="/Queens/19WD.png"
-                beeName="Bee #9876"
-                attackValue={100}
-                defenseValue={220}
-                forageValue={50}
-              />
-              <BeeCard
-                imagePath="/Queens/19WD.png"
-                beeName="Bee #9876"
-                attackValue={100}
-                defenseValue={210}
-                forageValue={50}
-              />
-              <BeeCard
-                imagePath="/Queens/19WD.png"
-                beeName="Bee #9876"
-                attackValue={100}
-                defenseValue={204}
-                forageValue={50}
-              />
+              {additionalBees.map((bee, index) => (
+                <WrapItem key={index}>
+                  <BeeCard
+                    imagePath={bee.imagePath}
+                    beeName={bee.beeName}
+                    attackValue={bee.attackValue}
+                    defenseValue={bee.defenseValue}
+                    forageValue={bee.forageValue}
+                  />
+                </WrapItem>
+              ))}
             </HStack>
-          </Container>
-    
-          <Button colorScheme="purple" size="md" w="full">
-            Show More
-          </Button>
+          )}
+
+          {/* Show More Your Bee Button */}
+          {!showMoreClicked && (
+            <Flex padding="3rem 10rem 8rem 5rem" justify="center">
+              <Button
+                colorScheme="purple"
+                size="md"
+                w="50%"
+                onClick={handleShowMoreClick} // Handle the click event
+              >
+                Show More
+              </Button>
+            </Flex>
+          )}
         </VStack>
       </Container>
     </Layout>

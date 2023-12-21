@@ -100,6 +100,10 @@ export default function BeeCard({
             color="white"
             fontSize="3rem"
             textAlign="center"
+            whiteSpace="nowrap" // Prevent text from wrapping
+            overflow="hidden" // Hide overflow
+            textOverflow="ellipsis" // Show ellipsis for overflowed text
+            maxH="5rem" // Set a max-height to control the text height
           >
             {beeName}
           </Text>
