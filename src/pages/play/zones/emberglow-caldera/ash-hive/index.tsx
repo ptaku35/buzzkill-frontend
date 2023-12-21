@@ -28,6 +28,8 @@ import {
 
 import BuzzkillNFT from "../../../../../assets/BuzzkillNFT.json";
 import HiveVault from "../../../../../assets/HiveVault.json";
+import BeeCard from "Components/BeeCard/BeeCard";
+import ImagePlaceHolder from "Components/ImagePlaceHolder";
 const BuzzkillNFTAbi = BuzzkillNFT;
 const HiveVaultAbi = HiveVault;
 
@@ -316,51 +318,38 @@ export default function AshHive() {
         >
           <Heading textColor="white">Worker Bees Staked</Heading>
           {/* Horizontal Stack for Honey Monarch and Worker Bee Capacities */}
-          <HStack justify="space-between">
-            {/* Honey Monarch Capacity */}
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/22WD.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #4423
-              </Text>
-            </Box>
-
-            {/* Worker Bee Capacity */}
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/14WL.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #223
-              </Text>
-            </Box>
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/18WD.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #413
-              </Text>
-            </Box>
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/19WD.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Worker Bee #113
-              </Text>
-            </Box>
-          </HStack>
+          <Container>
+            <HStack spacing="3rem" justify="center">
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={300}
+                forageValue={50}
+              />
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={220}
+                forageValue={50}
+              />
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={210}
+                forageValue={50}
+              />
+              <BeeCard
+                imagePath="/Queens/19WD.png"
+                beeName="Bee #9876"
+                attackValue={100}
+                defenseValue={204}
+                forageValue={50}
+              />
+            </HStack>
+          </Container>
           {/* Stake Your Bee Button */}
           <Button colorScheme="purple" size="md" w="full">
             Show More

@@ -10,6 +10,7 @@ import {
   Spacer,
   Button,
   Center,
+  HStack,
 } from "@chakra-ui/react";
 import CardButton from "Components/CardButton/CardButton";
 import styles from "../styles/Home.module.css";
@@ -20,6 +21,7 @@ import { getSession } from "next-auth/react";
 import { getToken } from "next-auth/jwt";
 import { useRouter } from "next/router";
 import Container from "Components/Container/Container";
+import BeeCard from "Components/BeeCard/BeeCard";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -126,71 +128,62 @@ export default function Home({ address }: AuthenticatedPageProps) {
           Each specialising in their own unique traits and environment types{" "}
           <br></br> As you Earn resources you can upgrade your characters
         </Text>
-        <SimpleGrid
-          className={styles.simpleGrid}
-          px="100px"
-          minChildWidth="140px"
-        >
-          <CardButton href="/gallery">
-            <Image
-              src="/Queens/18WD.png"
-              alt="Worker-warrior"
-              borderRadius="10px"
-            />
-            <Heading color="white" margin="1.5rem" size="md">
-              Apiarist Avenger - Worker Bee
-            </Heading>
-            <Text fontSize="md" color="white">
-              Clad in ornate armor resembling the intricate patterns of
+        <Container fullWidth={true}>
+          <HStack
+            spacing="4rem"
+            justify="center"
+            padding="0rem 12rem 5rem 12rem"
+          >
+            <BeeCard
+              imagePath="/Queens/18WD.png"
+              beeName="Apiarist Avenger"
+              beeType="Worker Bee"
+              beeEnvironment="Mountain"
+              descriptionText="Clad in ornate armor resembling the intricate patterns of
               honeycombs, this warrior bee exudes a majestic aura. He excels in
-              frontline assaults.
-            </Text>
-          </CardButton>
-
-          <CardButton href="/gallery">
-            <Image
-              src="/Queens/Q2.png"
-              borderRadius="10px"
-              alt="Queen-forest"
+              frontline assaults."
+              attackValue={550}
+              defenseValue={250}
+              forageValue={90}
             />
-            <Heading color="white" margin="1.5rem" size="md">
-              Sovereign Syrphidae - Queen Bee
-            </Heading>
-            <Text fontSize="md" color="white">
-              The Queen of the Verdant Canopy. Her scepter channels the life
+            <BeeCard
+              imagePath="/Queens/Q2.png"
+              beeName="Sovereign Syrphidae"
+              descriptionText="The Queen of the Verdant Canopy. Her scepter channels the life
               force of the forest, and her will is the unbreakable bond that
-              unites every drone and worker.
-            </Text>
-          </CardButton>
-
-          <CardButton href="/gallery">
-            <Image
-              src="/Queens/19WD.png"
-              borderRadius="10px"
-              alt="warruir sabds"
+              unites every drone and worker."
+              beeType="Queen Bee"
+              beeEnvironment="Forest"
+              attackValue={70}
+              defenseValue={800}
+              forageValue={50}
             />
-            <Heading color="white" margin="1.5rem" size="md">
-              Sentinel of Shifting Sands - Worker Bee
-            </Heading>
-            <Text fontSize="md" color="white">
-              His armor gleams like the heart of the desert sun, a bastion
+            <BeeCard
+              imagePath="/Queens/19WD.png"
+              beeName="Sentinel of Shifting Sands"
+              beeType="Worker Bee"
+              beeEnvironment="Desert"
+              descriptionText="His armor gleams like the heart of the desert sun, a bastion
               amidst the ever-changing dunes. His lance commands the winds, his
-              gaze challenges the horizon.
-            </Text>
-          </CardButton>
-
-          <CardButton href="/gallery">
-            <Image src="/Queens/Q8.png" borderRadius="10px" alt="Docs Image" />
-            <Heading color="white" margin="1.5rem" size="md">
-              Monarch of the Frosted Expanse - Queen Bee
-            </Heading>
-            <Text fontSize="md" color="white">
-              Crowned in ice and majesty, her scepter reigns over the silent,
+              gaze challenges the horizon."
+              attackValue={140}
+              defenseValue={650}
+              forageValue={50}
+            />
+            <BeeCard
+              imagePath="/Queens/Q8.png"
+              beeName="Sovereign Syrphidae"
+              beeType="Queen Bee"
+              beeEnvironment="Ice"
+              descriptionText="Crowned in ice and majesty, her scepter reigns over the silent,
               snowy realms. Her wings, delicate as winter's first snowflake,
-              bear the frost's eternal grace.
-            </Text>
-          </CardButton>
-        </SimpleGrid>
+              bear the frost's eternal grace."
+              attackValue={180}
+              defenseValue={550}
+              forageValue={130}
+            />
+          </HStack>
+        </Container>
 
         <Container>
           <Box

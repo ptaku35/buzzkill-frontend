@@ -25,6 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <Flex
           direction="column"
+          width="100vw"
           minH={`calc(100vh - ${headerHeight}px)`}
           textAlign="center"
           style={{ display: "flex", flexDirection: "column" }}
