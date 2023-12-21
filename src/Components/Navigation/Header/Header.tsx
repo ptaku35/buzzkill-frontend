@@ -98,7 +98,7 @@ export default function Header() {
     >
       <Link href="/" shallow>
         <Box className={styles.nav_logo}>
-          <Image src="/buzzkill-logo-hero.svg" alt="Buzzkill-logo" />
+          <Image src="/logos/buzzkill-logo-nav.png" alt="Buzzkill-logo" />
         </Box>
       </Link>
       <Spacer></Spacer>

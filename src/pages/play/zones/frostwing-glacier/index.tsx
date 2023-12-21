@@ -66,7 +66,7 @@ export default function FrostwingGlacier() {
                 left: 0,
               }}
             >
-              <source src="/animations/ice.mp4" type="video/mp4" />
+              <source src="/Animations/ice.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <Box
@@ -91,7 +91,7 @@ export default function FrostwingGlacier() {
               top="12%"
               left={{ base: "60%", md: "72%" }}
               href="/play"
-              imageSrc="/small-map.svg"
+              imageSrc="/NavigationIcons/small-map.svg"
               navigationLabel="Back to Map"
             />
             {/* Overlay triangles */}

@@ -6,13 +6,13 @@ import Container from "Components/Container/Container";
 import { FaCircle } from "react-icons/fa"; // Make sure to install react-icons if you haven't already
 
 const images = [
-  "/ocean.png",
-  "/mountain-world.png",
-  "/forest.png",
-  "/river.png",
-  "/fire-volcano.png",
-  "/desert.png",
-  "/ice.webp",
+  "/worlds/ocean.png",
+  "/worlds/mountain-world.png",
+  "/worlds/forest.png",
+  "/worlds/river.png",
+  "/worlds/fire-volcano.png",
+  "/worlds/desert.png",
+  "/worlds/ice.webp",
 ];
 
 export default function Gallery() {

@@ -65,7 +65,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
             overflow="hidden" // Ensure the overflowing parts of the image are not shown
           >
             <Image
-              src="/hero-image-queen.png"
+              src="/HomePage/hero-image-queen.png"
               alt="Hero Image"
               borderRadius="0px"
               width="full"
@@ -81,7 +81,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
               flexDirection="column"
             >
               <Image
-                src="/buzzkill-logo-hero.svg"
+                src="/logos/buzzkill-logo-hero.svg"
                 alt="Buzzkill Logo"
                 borderRadius="0px"
                 width="auto" // Maintain the original width of the logo
@@ -212,7 +212,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
               >
                 <Image
                   h="500px"
-                  src="/river.png" // the image path
+                  src="worlds/river.png" // the image path
                   borderRadius="10px"
                   alt="River Hive" // alt text for the image
                   boxShadow="0 0 8px 2px rgba(255, 255, 180, 0.4), 0 0 8px 2px rgba(75, 0, 130, 0.4)" // Glow effect
@@ -304,7 +304,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
               >
                 <Image
                   h="500px"
-                  src="/mountain-world.png"
+                  src="worlds//mountain-world.png"
                   borderRadius="10px"
                   alt="Mountain Hive"
                   boxShadow="0 0 8px 2px rgba(255, 255, 180, 0.4), 0 0 8px 2px rgba(75, 0, 130, 0.4)" // Glow effect
@@ -335,7 +335,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
               >
                 <Image
                   h="500px"
-                  src="/ocean.png" // the image path
+                  src="worlds//ocean.png" // the image path
                   borderRadius="10px"
                   alt="ocean Hive" // alt text for the image
                   boxShadow="0 0 8px 2px rgba(255, 255, 180, 0.4), 0 0 8px 2px rgba(75, 0, 130, 0.4)" // Glow effect
@@ -379,7 +379,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
 
         {/*ROADMAP*/}
         <Container fullWidth={true}>
-          <Image src="roadmap.svg" width="100%"></Image>
+          <Image src="roadmap/Roadmap.svg" width="100%"></Image>
         </Container>
 
         {/* STATS */}
@@ -394,7 +394,7 @@ export default function Home({ address }: AuthenticatedPageProps) {
                   <Box ml={8}>
                     <Image
                       className={styles.image}
-                      src="bee-emblem.svg"
+                      src="HomePage/bee-emblem.svg"
                       alt="bee emblek Logo"
                       mr={3}
                       width={300}

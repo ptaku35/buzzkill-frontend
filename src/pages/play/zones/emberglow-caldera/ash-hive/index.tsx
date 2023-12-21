@@ -143,7 +143,7 @@ export default function AshHive() {
           />
           {/* Main Background Image */}
           <Image
-            src="/fire-volcano.png"
+            src="/worlds/fire-volcano.png"
             alt="Hero Image"
             position="absolute"
             top="0"
@@ -180,7 +180,7 @@ export default function AshHive() {
             top="50%"
             left={{ base: "40%", md: "60%" }}
             href="/play/zones/emberglow-caldera"
-            imageSrc="/emberglow-map-small.svg"
+            imageSrc="/NavigationIcons/emberglow-map-small.svg"
             navigationLabel="Emberglow Caldera"
           />
           {/* Back to Main Map */}
@@ -188,7 +188,7 @@ export default function AshHive() {
             top="50%"
             left={{ base: "60%", md: "70%" }}
             href="/play"
-            imageSrc="/small-map.svg"
+            imageSrc="/NavigationIcons/small-map.svg"
             navigationLabel="Main Map"
           />
         </Box>

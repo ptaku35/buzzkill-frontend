@@ -73,7 +73,7 @@ export default function Play() {
                 left: 0,
               }}
             >
-              <source src="/animations/map-video.mp4" type="video/mp4" />
+              <source src="/Animations/map-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <Box

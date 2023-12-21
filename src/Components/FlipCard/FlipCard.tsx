@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 let AnimatedBox = motion.div;
 
-// Framer animations
+// Framer Animations
 const duration = 0.3;
 const flipVariants = {
   shown: {

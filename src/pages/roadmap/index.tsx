@@ -20,7 +20,7 @@ export default function Roadmap() {
             overflow="hidden" // Ensure the overflowing parts of the image are not shown
           >
             <Image
-              src="/roadmap.svg"
+              src="/Roadmap/roadmap.svg"
               alt="Hero Image"
               borderRadius="0px"
               width="full"

@@ -61,7 +61,7 @@ export default function Play() {
               height: "100%",
             }}
           >
-            <source src="/volcano-smoke-map.mp4" type="video/mp4" />
+            <source src="/Animations/volcano-smoke-map.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 

@@ -67,7 +67,7 @@ export default function EmberglowCaldera() {
               }}
             >
               <source
-                src="/animations/emberglow-caldera.mp4"
+                src="/Animations/emberglow-caldera.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
@@ -94,7 +94,7 @@ export default function EmberglowCaldera() {
               top="12%"
               left={{ base: "60%", md: "72%" }}
               href="/play"
-              imageSrc="/small-map.svg"
+              imageSrc="/NavigationIcons/small-map.svg"
               navigationLabel="Back to Map"
             />
             {/* Overlay triangles */}
