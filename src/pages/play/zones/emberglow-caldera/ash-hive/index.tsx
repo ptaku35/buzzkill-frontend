@@ -28,6 +28,7 @@ import {
 
 import BuzzkillNFT from "../../../../../assets/BuzzkillNFT.json";
 import HiveVault from "../../../../../assets/HiveVault.json";
+import TomoScanLink from "Components/TomoScanLink";
 
 // CONSTANT CONTRACT VARIABLES
 const BuzzkillNFTAbi = BuzzkillNFT;
@@ -304,7 +305,8 @@ export default function AshHive() {
               </Text>
             </Box>
           </HStack>
-          {/* Staking/Unstaking Buttons */}
+
+          {/* Staking/Claiming/Unstaking Buttons */}
           <Container>
             <HStack justify="center" spacing="10rem">
               <Box
@@ -350,40 +352,13 @@ export default function AshHive() {
             </HStack>
             {/* Display TomoScan TX Link */}
             {stakeData && (
-              <Box>
-                <a
-                  href={`https://testnet.tomoscan.io/tx/${stakeData?.hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "yellow", fontSize: "30px" }}
-                >
-                  View on TomoScan Testnet
-                </a>
-              </Box>
+              <TomoScanLink txHash={stakeData?.hash} />
             )}
             {claimData && (
-              <Box>
-                <a
-                  href={`https://testnet.tomoscan.io/tx/${claimData?.hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "yellow", fontSize: "30px" }}
-                >
-                  View on TomoScan Testnet
-                </a>
-              </Box>
+              <TomoScanLink txHash={claimData?.hash} />
             )}
             {unstakeData && (
-              <Box>
-                <a
-                  href={`https://testnet.tomoscan.io/tx/${unstakeData?.hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "yellow", fontSize: "30px" }}
-                >
-                  View on TomoScan Testnet
-                </a>
-              </Box>
+              <TomoScanLink txHash={unstakeData?.hash} />
             )}
           </Container>
 
