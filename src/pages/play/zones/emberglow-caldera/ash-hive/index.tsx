@@ -258,7 +258,7 @@ export default function AshHive() {
               color="white"
               textAlign="center"
               zIndex={2}
-              fontSize="10rem"
+              fontSize="8rem"
               whiteSpace="nowrap"
             >
               Ash Hive
@@ -289,7 +289,7 @@ export default function AshHive() {
           spacing={4} // space between children
           align="stretch" // stretch children to fill the width
           borderRadius="md"
-          padding="10rem 20em 0rem 20rem"
+          padding="5rem 20em 0rem 20rem"
         >
           <Heading textColor="white" padding="0rem 5rem 3rem 5rem">
             Hive Capacity
@@ -305,15 +305,15 @@ export default function AshHive() {
             >
               <Text
                 fontWeight="bold"
-                fontSize="4rem"
-                padding="2rem 2rem 2rem 2rem" // padding inside the content container
+                fontSize="3rem"
+                padding="1rem 1rem 1rem 1rem" // padding inside the content container
               >
                 Honey Monarch Capacity
               </Text>
               <Text
                 fontWeight="bold"
-                fontSize="4rem"
-                padding="2rem 2rem 2rem 2rem" // padding inside the content container
+                fontSize="3rem"
+                padding="1rem 1rem 1rem 1rem" // padding inside the content container
               >
                 2/3
               </Text>
@@ -328,15 +328,15 @@ export default function AshHive() {
             >
               <Text
                 fontWeight="bold"
-                fontSize="4rem"
-                padding="2rem 2rem 2rem 2rem" // padding inside the content container
+                fontSize="3rem"
+                padding="1rem 1rem 1rem 1rem" // padding inside the content container
               >
                 Worker Bee Capacity
               </Text>
               <Text
                 fontWeight="bold"
-                fontSize="4rem"
-                padding="2rem 2rem 2rem 2rem" // padding inside the content container
+                fontSize="3rem"
+                padding="1rem 1rem 1rem 1rem" // padding inside the content container
               >
                 30/55
               </Text>
@@ -423,15 +423,15 @@ export default function AshHive() {
           padding="5rem 10rem 5rem 10rem"
         >
           <Heading
-            padding="5rem 10rem 8rem 10rem"
-            fontSize="6rem"
+            padding="0rem 5rem 3rem 5rem"
+            fontSize="4rem"
             textColor="white"
           >
             Queen Bees Staked
           </Heading>
 
           {/* Render the queen bees in an HStack */}
-          <HStack spacing="3rem" justify="center" padding="0rem 0rem 5rem 0rem">
+          <HStack spacing="3rem" justify="center" padding="0rem 20rem 5rem 20rem">
             {queenBees.map((queenBee, index) => (
               <BeeCard
                 key={index}
