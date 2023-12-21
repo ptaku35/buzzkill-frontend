@@ -20,6 +20,9 @@ import { parseEther } from "viem";
 import BuzzkillNFT from "../../../src/assets/BuzzkillNFT.json";
 import React, { useState, useRef } from "react";
 import { ethers } from "ethers";
+import TomoScanLink from "Components/TomoScanLink";
+
+
 
 // CONSTANT VARIABLES
 const stakingNFTABI = BuzzkillNFT;
@@ -190,18 +193,9 @@ export default function Mint() {
           </Button>
           {isMinted && mintData && (
             <VStack>
-              <Box>
-                <a
-                  href={`https://testnet.tomoscan.io/tx/${mintData?.hash}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "yellow", fontSize: "20px" }}
-                >
-                  View on TomoScan Testnet
-                </a>
-              </Box>
+              <TomoScanLink txHash={mintData?.hash} />
               <Box style={{ color: "white", fontSize: "20px" }}>
-                Your NFT here!
+                Your NFT is here!
               </Box>
               <Box>
                 {/* Conditional rendering of image */}

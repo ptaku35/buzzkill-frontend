@@ -1,5 +1,5 @@
 import Layout from "Components/Layout/Layout";
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useState, useEffect } from "react";
 import Head from "next/head";
 import Container from "Components/Container/Container";
 import {
@@ -28,14 +28,16 @@ import {
 
 import BuzzkillNFT from "../../../../../assets/BuzzkillNFT.json";
 import HiveVault from "../../../../../assets/HiveVault.json";
+import TomoScanLink from "Components/TomoScanLink";
 import BeeCard from "Components/BeeCard/BeeCard";
 import ImagePlaceHolder from "Components/ImagePlaceHolder";
+
+
+// CONSTANT CONTRACT VARIABLES
 const BuzzkillNFTAbi = BuzzkillNFT;
 const HiveVaultAbi = HiveVault;
-
-const buzkillContractAddress = process.env
+const buzzkillContractAddress = process.env
   .NEXT_PUBLIC_BUZZKILL_NFT_CONTRACT as `0x${string}`;
-
 const hiveVaultAddress = process.env
   .NEXT_PUBLIC_HIVE_VAULT_CONTRACT as `0x${string}`;
 
@@ -47,20 +49,20 @@ export default function AshHive() {
   // Buzzkill Approval contract read/writes
   // read Approval Status
   const { data: approvedStatus } = useContractRead({
-    address: buzkillContractAddress,
+    address: buzzkillContractAddress,
     abi: BuzzkillNFTAbi,
     functionName: "isApprovedForAll",
     args: [address, hiveVaultAddress],
     watch: true,
   });
 
-  // Setup Write contract for Approve All
+  // contract BuzzkillNFT Approve All
   const {
     config: configSetApproval,
     error: prepareSetApprovalError,
     isError: isPrepareSetApprovalError,
   } = usePrepareContractWrite({
-    address: buzkillContractAddress,
+    address: buzzkillContractAddress,
     abi: BuzzkillNFTAbi,
     functionName: "setApprovalForAll",
     args: [hiveVaultAddress, true],
@@ -77,26 +79,66 @@ export default function AshHive() {
 
   // contract Hive Vault Staking
   const {
-    config,
-    error: prepareError,
-    isError: isPrepareError,
+    config: stakingConfig,
+    error: prepareStakingError,
+    isError: isPrepareStakingError,
   } = usePrepareContractWrite({
     address: hiveVaultAddress,
     abi: HiveVaultAbi,
     functionName: "deposit",
-    args: ["2"],
+    args: ["5"],
   });
-
   const {
     write: deposit,
-    isLoading: isProcessStaking,
+    isLoading: isProcessingStaking,
     isSuccess: isStaked,
     isError: isStakeError,
     error: stakeError,
     data: stakeData,
-  } = useContractWrite(config);
+  } = useContractWrite(stakingConfig);
 
-  React.useEffect(() => {
+  // contract Hive Vault Unstaking
+  const {
+    config: unstakingConfig,
+    error: prepareUnstakeError,
+    isError: isPrepareUnstakeError,
+  } = usePrepareContractWrite({
+    address: hiveVaultAddress,
+    abi: HiveVaultAbi,
+    functionName: "withdraw",
+    args: ["5"],
+  });
+  const {
+    write: withdraw,
+    isLoading: isProcessingUnstaking,
+    isSuccess: isUnstaked,
+    isError: isUnstakedError,
+    error: unstakeError,
+    data: unstakeData,
+  } = useContractWrite(unstakingConfig);
+
+   // contract Hive Vault Claim
+  const {
+    config: claimConfig,
+    error: claimError,
+    isError: isPrepareClaimError,
+  } = usePrepareContractWrite({
+    address: hiveVaultAddress,
+    abi: HiveVaultAbi,
+    functionName: "claim",
+    args: [],
+  });
+  const {
+    write: claim,
+    isLoading: isProcessingClaim,
+    isSuccess: isClaimed,
+    isError: isClaimedError,
+    error: claimedError,
+    data: claimData,
+  } = useContractWrite(claimConfig);
+
+  // Listen for approval status
+  useEffect(() => {
     if ((approvedStatus as number) > 0) {
       setIsApproved(true);
     } else {
@@ -117,15 +159,26 @@ export default function AshHive() {
     zIndex: 2, // Make sure this is above the main image
   };
 
+  // Stake functionality if approved
   const handleStakeButtonClick = () => {
     if (!isApproved) {
-      console.log("approva all state");
+      console.log("approve all state");
       approveAll?.();
     } else {
       console.log("deposit Bee state");
       deposit?.();
     }
   };
+
+  // Unstake functionality
+  const handleUnstakeButtonClick = () => {
+    withdraw?.();
+  }
+
+  // Claim Rewards functionality
+  const handleClaimButtonClick = () => {
+    claim?.();
+  }
 
   return (
     <Layout>
@@ -255,16 +308,63 @@ export default function AshHive() {
               </Text>
             </Box>
           </HStack>
-          <Box
-            padding="4rem 2rem 2rem 2rem" // padding inside the content container
-            alignSelf="center"
-          >
-            {/* Stake Your Bee Button */}
-            <Button alignSelf="center" onClick={handleStakeButtonClick}>
-              {" "}
-              {isApproved ? "Stake your Bee" : "Approve your Bee"}
-            </Button>
-          </Box>
+
+          {/* Staking/Claiming/Unstaking Buttons */}
+          <Container>
+            <HStack justify="center" spacing="10rem">
+              <Box
+                padding="4rem 2rem 2rem 2rem" // padding inside the content container
+                alignSelf="center"
+              >
+                {/* Stake Your Bee Button */}
+                <Button
+                  alignSelf="center"
+                  onClick={handleStakeButtonClick}
+                  isDisabled={!isConnected || isProcessingApproval || isProcessingStaking || isProcessingUnstaking || isProcessingClaim}
+                >
+                  {" "}
+                  {isApproved ? "Stake your Bee" : "Approve your Bee"}
+                </Button>
+              </Box>
+              <Box
+                padding="4rem 2rem 2rem 2rem" // padding inside the content container
+                alignSelf="center"
+              >
+                {/* Claim Rewards Button */}
+                <Button
+                  alignSelf="center"
+                  onClick={handleClaimButtonClick}
+                  isDisabled={!isConnected || isProcessingStaking || isProcessingUnstaking || !isApproved || isProcessingClaim}
+                >
+                  CLAIM REWARDS
+                </Button>
+              </Box>
+              <Box
+                padding="4rem 2rem 2rem 2rem" // padding inside the content container
+                alignSelf="center"
+              >
+                {/* Unstake Your Bee Button */}
+                <Button
+                  alignSelf="center"
+                  onClick={handleUnstakeButtonClick}
+                  isDisabled={!isConnected || isProcessingStaking || isProcessingUnstaking || !isApproved || isProcessingClaim}
+                >
+                  UNSTAKE YOUR BEE
+                </Button>
+              </Box>
+            </HStack>
+            {/* Display TomoScan TX Link */}
+            {stakeData && (
+              <TomoScanLink txHash={stakeData?.hash} />
+            )}
+            {claimData && (
+              <TomoScanLink txHash={claimData?.hash} />
+            )}
+            {unstakeData && (
+              <TomoScanLink txHash={unstakeData?.hash} />
+            )}
+          </Container>
+
         </VStack>
       </Container>
 
@@ -318,6 +418,51 @@ export default function AshHive() {
         >
           <Heading textColor="white">Worker Bees Staked</Heading>
           {/* Horizontal Stack for Honey Monarch and Worker Bee Capacities */}
+          <HStack justify="space-between">
+            {/* Honey Monarch Capacity */}
+            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
+              <Image
+                src="/Queens/22WD.png"
+                alt="Worker-warrior"
+                borderRadius="15px"
+              ></Image>
+              <Text fontSize="xl" fontWeight="semibold">
+                Worker Bee #4423
+              </Text>
+            </Box>
+
+            {/* Worker Bee Capacity */}
+            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
+              <Image
+                src="/Queens/14WL.png"
+                alt="Worker-warrior"
+                borderRadius="15px"
+              ></Image>
+              <Text fontSize="xl" fontWeight="semibold">
+                Worker Bee #223
+              </Text>
+            </Box>
+            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
+              <Image
+                src="/Queens/18WD.png"
+                alt="Worker-warrior"
+                borderRadius="15px"
+              ></Image>
+              <Text fontSize="xl" fontWeight="semibold">
+                Worker Bee #413
+              </Text>
+            </Box>
+            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
+              <Image
+                src="/Queens/19WD.png"
+                alt="Worker-warrior"
+                borderRadius="15px"
+              ></Image>
+              <Text fontSize="xl" fontWeight="semibold">
+                Worker Bee #113
+              </Text>
+            </Box>
+          </HStack>
           <Container>
             <HStack spacing="3rem" justify="center">
               <BeeCard
@@ -350,7 +495,7 @@ export default function AshHive() {
               />
             </HStack>
           </Container>
-          {/* Stake Your Bee Button */}
+    
           <Button colorScheme="purple" size="md" w="full">
             Show More
           </Button>
