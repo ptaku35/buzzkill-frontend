@@ -31,8 +31,12 @@ import BuzzkillNFT from "../../../../../assets/BuzzkillNFT.json";
 import HiveVault from "../../../../../assets/HiveVault.json";
 import TomoScanLink from "Components/TomoScanLink";
 import BeeCard from "Components/BeeCard/BeeCard";
-import hiveBeesData from "../../../../../assets/data/hiveBees.json";
+
+// import data
 import { Bee } from "../../../../../types/BeeTraits";
+
+import hiveBeesData from "../../../../../assets/data/hiveBees.json";
+import hiveQueenData from "../../../../../assets/data/hiveQueenBees.json";
 
 // CONSTANT CONTRACT VARIABLES
 const BuzzkillNFTAbi = BuzzkillNFT;
@@ -46,6 +50,8 @@ export default function AshHive() {
   const [isApproved, setIsApproved] = useState(false);
   const { address, isConnected } = useAccount();
   const [bees, setBees] = useState<Bee[]>([]); // Use the Bee type for the state
+  const [queenBees, setQueenBees] = useState(hiveQueenData);
+
   const [visibleBees, setVisibleBees] = useState<Bee[]>([]); // Store the currently visible bees
   const [showMoreClicked, setShowMoreClicked] = useState(false); // Track if the "Show More" button was clicked
   // State for additional bees
@@ -410,37 +416,31 @@ export default function AshHive() {
       <Container>
         {/* Stack the components vertically */}
         <VStack
-          spacing={8} // space between children
-          align="stretch" // stretch children to fill the width
+          spacing={4}
+          align="stretch"
           borderRadius="md"
-          p={4}
+          padding="5rem 10rem 5rem 10rem"
         >
-          <Heading textColor="white">Queen Bees Staked</Heading>
-          {/* Horizontal Stack for Honey Monarch and Worker Bee Capacities */}
-          <HStack justify="space-between">
-            {/* Honey Monarch Capacity */}
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/Q5.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Honey Monarch #23
-              </Text>
-            </Box>
+          <Heading
+            padding="5rem 10rem 8rem 10rem"
+            fontSize="6rem"
+            textColor="white"
+          >
+            Queen Bees Staked
+          </Heading>
 
-            {/* Worker Bee Capacity */}
-            <Box p={4} bg="brand.60" borderRadius="15px" flex="1">
-              <Image
-                src="/Queens/Q2.png"
-                alt="Worker-warrior"
-                borderRadius="15px"
-              ></Image>
-              <Text fontSize="xl" fontWeight="semibold">
-                Honey Monarch #228
-              </Text>
-            </Box>
+          {/* Render the queen bees in an HStack */}
+          <HStack spacing="3rem" justify="center" padding="0rem 0rem 5rem 0rem">
+            {queenBees.map((queenBee, index) => (
+              <BeeCard
+                key={index}
+                imagePath={queenBee.imagePath}
+                beeName={queenBee.beeName}
+                attackValue={queenBee.attackValue}
+                defenseValue={queenBee.defenseValue}
+                forageValue={queenBee.forageValue}
+              />
+            ))}
           </HStack>
         </VStack>
       </Container>

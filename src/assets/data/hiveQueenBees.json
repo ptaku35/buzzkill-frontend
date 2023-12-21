@@ -1,0 +1,16 @@
+[
+  {
+    "imagePath": "/Queens/Q2.png",
+    "beeName": "Emerald Queen",
+    "attackValue": 300,
+    "defenseValue": 950,
+    "forageValue": 20
+  },
+  {
+    "imagePath": "/Queens/Q5.png",
+    "beeName": "Monarch of the Sky",
+    "attackValue": 130,
+    "defenseValue": 740,
+    "forageValue": 10
+  }
+]
