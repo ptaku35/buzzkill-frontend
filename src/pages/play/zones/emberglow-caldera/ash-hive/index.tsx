@@ -49,6 +49,7 @@ const hiveVaultAddress = process.env
 export default function AshHive() {
   const [isApproved, setIsApproved] = useState(false);
   const { address, isConnected } = useAccount();
+
   const [bees, setBees] = useState<Bee[]>([]); // Use the Bee type for the state
   const [queenBees, setQueenBees] = useState(hiveQueenData);
 

@@ -2,18 +2,24 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import MapTriangle from "Components/MapTriangle/MapTriangle";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading } from "@chakra-ui/react";
 import GameLayout from "Components/Layout/GameLayout/GameLayout";
 import useMeasureHeight from "../../../../hooks/useMeasureHeight";
 import { useLoading } from "../../../../contexts/LoadingContext";
 import MapNavigation from "Components/NavigationMap/NavigationMap";
 import SemiTransparentBackground from "Components/SemiTransparentBackground";
+import ResourcePin from "Components/ResourcePin/ResourcePin";
+import ResourceModal from "Components/ResourceModal"; // Adjust the import path as needed
 
 export default function EmberglowCaldera() {
   const router = useRouter();
   const { ref, headerHeight } = useMeasureHeight();
 
   const { isLoading } = useLoading();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const handleClick = (hiveName: string) => {
     switch (hiveName) {
@@ -97,6 +103,14 @@ export default function EmberglowCaldera() {
               imageSrc="/NavigationIcons/small-map.svg"
               navigationLabel="Back to Map"
             />
+            {/* ResourcePin Sap */}
+            <ResourcePin
+              top="50%"
+              left={{ base: "50%", md: "52%" }}
+              onClick={openModal}
+              imageSrc="/icons/resources/sap.svg"
+              navigationLabel="Forage Sap"
+            />
             {/* Overlay triangles */}
             <MapTriangle
               top="26%"
@@ -111,6 +125,14 @@ export default function EmberglowCaldera() {
               label="Phoenix Hive"
               onClick={() => handleClick("Phoenix Hive")}
             />
+
+            {/* Modal Component */}
+            <ResourceModal
+              isOpen={isModalOpen}
+              onClose={closeModal}
+              title="Resource Details"
+              contentText="hellp"
+            ></ResourceModal>
           </Box>
         </>
       )}
