@@ -23,8 +23,7 @@ const mintCostInWei = parseEther("1");
 const baseURI = "ipfs://bafybeiayhxazprulpurcaz26y74slp3lfayyeu3n547esianwwpf6ha55e/"
 const gatewayUrl = baseURI.replace('ipfs://', 'https://ipfs.io/ipfs/');
 
-
-
+// Function for fetching NFT images to display after being minted
 async function fetchNFTMetadata(ipfsUrl:string) {
     const response = await fetch(ipfsUrl);
     console.log(response);
@@ -110,10 +109,11 @@ export default function Mint() {
         });
     }
 
+    // When NFT is minted, metadata is loaded so the image can be displayed
     React.useEffect(() => {
         if (isMinted) {
-            showSuccessfulToast?.();
-            console.log(tokenIdRef.current);
+            showSuccessfulToast?.();    
+            // Load metadata from minted NFT
             const loadMetadata = async () => {
                 const ipfsURI = gatewayUrl + tokenIdRef.current?.toString();
                 const metadata = await fetchNFTMetadata(ipfsURI);
@@ -121,13 +121,13 @@ export default function Mint() {
                 setNftMetadata(metadata);
             };
             loadMetadata();
-            console.log(nftMetadata);
 
         } else if (mintError) {
             showFailedToast?.();
         }   
     }, [isMinted, mintError]);
 
+    // Update image URL from metadata
     let name, description, image, attributes;
     if (nftMetadata) {
         ({ name, description, image, attributes } = nftMetadata);
