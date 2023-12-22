@@ -38,6 +38,11 @@ import { Bee } from "../../../../../types/BeeTraits";
 import hiveBeesData from "../../../../../assets/data/hiveBees.json";
 import hiveQueenData from "../../../../../assets/data/hiveQueenBees.json";
 
+import hives from "assets/data/hiveTraits";
+
+const ashHive = hives.find((hive) => hive.id === 1);
+
+
 // CONSTANT CONTRACT VARIABLES
 const BuzzkillNFTAbi = BuzzkillNFT;
 const HiveVaultAbi = HiveVault;
