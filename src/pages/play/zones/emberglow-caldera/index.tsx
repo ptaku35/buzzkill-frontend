@@ -103,7 +103,7 @@ export default function EmberglowCaldera() {
               }}
             >
               <source
-                src="/Animations/emberglow-caldera.mp4"
+                src="/animations/emberglow-caldera.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.

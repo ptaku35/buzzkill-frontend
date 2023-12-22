@@ -75,7 +75,7 @@ export default function FrostwingGlacier() {
               }}
               preload="none" // Lazy load the video
             >
-              <source src="/Animations/forest.mp4" type="video/mp4" />
+              <source src="/animations/forest.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <Box

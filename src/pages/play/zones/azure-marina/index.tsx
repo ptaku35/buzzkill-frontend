@@ -66,7 +66,7 @@ export default function FrostwingGlacier() {
                 left: 0,
               }}
             >
-              <source src="/Animations/water.mp4" type="video/mp4" />
+              <source src="/animations/water.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <Box

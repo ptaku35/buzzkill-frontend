@@ -66,7 +66,7 @@ export default function EmberglowCaldera() {
                 left: 0,
               }}
             >
-              <source src="/Animations/desert.mp4" type="video/mp4" />
+              <source src="/animations/desert.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <Box
