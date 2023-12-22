@@ -1,6 +1,4 @@
 import { BlocTraceUser, WagmiUserSession } from "../types/User";
-import { ConsignmentData, ConsignmentDetails } from "../types/ConsignmentData";
-import { ShipperProfile } from "../types/Shipper";
 import {
   getSession,
   GetSessionParams,
@@ -47,10 +45,7 @@ type AppStateContext = {
   user?: WagmiUserSession;
   userProfile?: BlocTraceUser;
   isVerified?: boolean;
-  userConsignmentData?: ConsignmentData;
   fetchConsignmentData: (userProfileId: string) => Promise<void>;
-  querySnapshotConsignments?: ConsignmentDetails;
-  querySnapshotShippers?: ShipperProfile;
   handleSignOut: () => Promise<void>;
 };
 const Context = createContext<AppStateContext>({} as AppStateContext);
@@ -64,9 +59,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   const [userProfile, setUserProfile] = useState<BlocTraceUser | undefined>(
     undefined
   );
-  const [userConsignmentData, setUserConsignmentData] = useState<
-    ConsignmentData | undefined
-  >(undefined);
+
   const [querySnapshotConsignments, setQuerySnapshotConsignments] =
     useState<any>();
   const [querySnapshotShippers, setQuerySnapshotShippers] = useState<any>();
@@ -85,7 +78,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Fetch data from DB
-  const fetchData = async (userProfileId: string) => { 
+  const fetchData = async (userProfileId: string) => {
     try {
       const q = query(
         collection(database, "users"),
@@ -95,7 +88,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       if (querySnapshot.size === 1) {
         const userData: BlocTraceUser =
           querySnapshot.docs[0].data() as BlocTraceUser;
-   
+
         setUserProfile(userData);
       }
     } catch (error) {
@@ -104,7 +97,6 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
   };
 
   const fetchConsignmentData = async (userProfileId: string) => {
-    
     try {
       const queryConsignments = query(
         collection(database, "consignment"),
@@ -130,23 +122,15 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
       const querySnapshotShippers = await getDocs(queryShippers);
       const totalShippers = querySnapshotShippers.size;
 
-      setUserConsignmentData({
-        consignments_assigned: assignedCount,
-        consignments_unassigned: unassignedCount,
-        total_consignments: totalConsignments,
-        user_shippers_count: totalShippers,
-      });
-
       setQuerySnapshotConsignments(querySnapshotConsignments); // Set querySnapshotConsignments
-      setQuerySnapshotShippers(querySnapshotShippers); 
+      setQuerySnapshotShippers(querySnapshotShippers);
     } catch (error) {
-     // console.error("Error retrieving user data from the database:", error);
+      // console.error("Error retrieving user data from the database:", error);
     }
   };
 
   useEffect(() => {
     if (user && user.profileId) {
-     
       fetchData(user.profileId);
       fetchConsignmentData(user.profileId);
     }
@@ -174,11 +158,7 @@ export function AppStateProvider({ children }: { children: React.ReactNode }) {
         user: user as WagmiUserSession,
         userProfile: userProfile as BlocTraceUser,
         isVerified: isVerified as boolean,
-        userConsignmentData: userConsignmentData as ConsignmentData,
         fetchConsignmentData,
-        querySnapshotConsignments:
-          querySnapshotConsignments as ConsignmentDetails,
-        querySnapshotShippers: querySnapshotShippers as ShipperProfile,
         handleSignOut,
       }}
     >
