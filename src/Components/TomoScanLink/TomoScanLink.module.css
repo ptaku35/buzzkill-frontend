@@ -1,0 +1,38 @@
+.tomoscanlink {
+    font-size: 30px;
+    color: #4CAF50;
+    /* Initial color */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tomoscanlink:hover,
+.tomoscanlink:focus {
+    color: #FFC107;
+    /* Color on hover */
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tomoscanlink:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #3498db;
+    /* Underline color */
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.tomoscanlink:hover:after {
+    visibility: visible;
+    width: 100%;
+    left: 0;
+}

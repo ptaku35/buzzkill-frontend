@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import styles from "./TomoScanLink.module.css";
 
 
 interface TomoScanLinkProps {
@@ -14,7 +15,7 @@ const TomoScanLink = ({ txHash }: TomoScanLinkProps) => {
         href={`https://testnet.tomoscan.io/tx/${txHash}`}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ color: "yellow", fontSize: "30px" }}
+        className={styles.tomoscanlink}
       >
         View on TomoScan Testnet
       </a>
