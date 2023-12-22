@@ -69,7 +69,6 @@ export default function AshHive() {
   }, [bees]);
 
   // Handle the "Show More" button click
-
   const handleShowMoreClick = () => {
     const startIndex = visibleBees.length;
     const endIndex = startIndex + 4; // You can adjust this to load more bees as needed
@@ -101,7 +100,6 @@ export default function AshHive() {
     functionName: "setApprovalForAll",
     args: [hiveVaultAddress, true],
   });
-
   const {
     write: approveAll,
     isLoading: isProcessingApproval,
@@ -119,11 +117,11 @@ export default function AshHive() {
   } = usePrepareContractWrite({
     address: hiveVaultAddress,
     abi: HiveVaultAbi,
-    functionName: "deposit",
-    args: ["5"],
+    functionName: "stakeBee",
+    args: [5, 1],
   });
   const {
-    write: deposit,
+    write: stakeBee,
     isLoading: isProcessingStaking,
     isSuccess: isStaked,
     isError: isStakeError,
@@ -139,11 +137,11 @@ export default function AshHive() {
   } = usePrepareContractWrite({
     address: hiveVaultAddress,
     abi: HiveVaultAbi,
-    functionName: "withdraw",
-    args: ["5"],
+    functionName: "unstakeBee",
+    args: [5],
   });
   const {
-    write: withdraw,
+    write: unstakeBee,
     isLoading: isProcessingUnstaking,
     isSuccess: isUnstaked,
     isError: isUnstakedError,
@@ -199,14 +197,14 @@ export default function AshHive() {
       console.log("approve all state");
       approveAll?.();
     } else {
-      console.log("deposit Bee state");
-      deposit?.();
+      console.log("stake Bee state");
+      stakeBee?.();
     }
   };
 
   // Unstake functionality
   const handleUnstakeButtonClick = () => {
-    withdraw?.();
+    unstakeBee?.();
   };
 
   // Claim Rewards functionality
