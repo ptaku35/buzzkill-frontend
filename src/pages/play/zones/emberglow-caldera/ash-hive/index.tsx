@@ -63,6 +63,10 @@ export default function AshHive() {
   // State for additional bees
   const [additionalBees, setAdditionalBees] = useState<Bee[]>([]);
 
+  // State to track tomoscanlink buttons.  Only one button should appear at a time when staking/unstaking/claiming
+  type Action = "stake" | "unstake" | "claim" | null;
+  const [lastAction, setLastAction] = useState<Action>(null);
+
   useEffect(() => {
     // Use the imported JSON data
     setBees(hiveBeesData);
@@ -204,17 +208,20 @@ export default function AshHive() {
     } else {
       console.log("stake Bee state");
       stakeBee?.();
+      setLastAction("stake");
     }
   };
 
   // Unstake functionality
   const handleUnstakeButtonClick = () => {
     unstakeBee?.();
+    setLastAction("unstake");
   };
 
   // Claim Rewards functionality
   const handleClaimButtonClick = () => {
     claim?.();
+    setLastAction("claim");
   };
 
   return (
@@ -409,9 +416,9 @@ export default function AshHive() {
               </Box>
             </HStack>
             {/* Display TomoScan TX Link */}
-            {stakeData && <TomoScanLink txHash={stakeData?.hash} />}
-            {claimData && <TomoScanLink txHash={claimData?.hash} />}
-            {unstakeData && <TomoScanLink txHash={unstakeData?.hash} />}
+            {lastAction === "stake" && stakeData && <TomoScanLink txHash={stakeData?.hash} />}
+            {lastAction === "claim" && claimData && <TomoScanLink txHash={claimData?.hash} />}
+            {lastAction === "unstake" && unstakeData && <TomoScanLink txHash={unstakeData?.hash} />}
           </Container>
         </VStack>
       </Container>
