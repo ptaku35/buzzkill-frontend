@@ -1,3 +1,5 @@
+ <img width="1000" height="150" top="150" src="./public/buzzkill-logo-hero.svg">
+
 # Buzzkill: Honeycomb Hustle Frontend
 
 ## Overview
