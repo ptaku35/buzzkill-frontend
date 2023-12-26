@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import SemiTransparentBackground from "../../../../../Components/SemiTransparentBackground";
 import MapNavigation from "Components/NavigationMap/NavigationMap";
+import { ethers } from "ethers";
 
 import {
   useAccount,
@@ -34,13 +35,10 @@ import BeeCard from "Components/BeeCard/BeeCard";
 
 // import data
 import { Bee } from "../../../../../types/BeeTraits";
-
 import hiveBeesData from "../../../../../assets/data/hiveBees.json";
 import hiveQueenData from "../../../../../assets/data/hiveQueenBees.json";
-
 import hives from "assets/data/hiveTraits";
-
-const ashHive = hives.find((hive) => hive.id === 1);
+import { totalmem } from "os";
 
 
 // CONSTANT CONTRACT VARIABLES
@@ -51,19 +49,22 @@ const buzzkillContractAddress = process.env
 const hiveVaultAddress = process.env
   .NEXT_PUBLIC_HIVE_VAULT_CONTRACT as `0x${string}`;
 
+const ashHive = hives.find((hive) => hive.id === 1);
+
+
 export default function AshHive() {
-  const [isApproved, setIsApproved] = useState(false);
   const { address, isConnected } = useAccount();
+  const [isApproved, setIsApproved] = useState(false);
+  const [totalMinted, setTotalMinted] = useState(0);
 
   const [bees, setBees] = useState<Bee[]>([]); // Use the Bee type for the state
   const [queenBees, setQueenBees] = useState(hiveQueenData);
 
-  const [visibleBees, setVisibleBees] = useState<Bee[]>([]); // Store the currently visible bees
-  const [showMoreClicked, setShowMoreClicked] = useState(false); // Track if the "Show More" button was clicked
-  // State for additional bees
-  const [additionalBees, setAdditionalBees] = useState<Bee[]>([]);
+  const [visibleBees, setVisibleBees] = useState<Bee[]>([]);        // Store the currently visible bees
+  const [showMoreClicked, setShowMoreClicked] = useState(false);    // Track if the "Show More" button was clicked
+  const [additionalBees, setAdditionalBees] = useState<Bee[]>([]);  // State for additional bees
 
-  // State to track tomoscanlink buttons.  Only one button should appear at a time when staking/unstaking/claiming
+  // State to track tomoscanlink buttons
   type Action = "stake" | "unstake" | "claim" | null;
   const [lastAction, setLastAction] = useState<Action>(null);
 
@@ -118,6 +119,18 @@ export default function AshHive() {
     data: approveData,
   } = useContractWrite(configSetApproval);
 
+  // contract BuzzkillNFT totalSupply
+  const {
+    data: totalSupplyData,
+    isError: isTotalSupplyError,
+    isLoading: IsSupplyLoading
+  } = useContractRead({
+    address: buzzkillContractAddress,
+    abi: BuzzkillNFTAbi,
+    functionName: "totalSupply",
+    watch: true,
+  })
+
   // contract Hive Vault Staking
   const {
     config: stakingConfig,
@@ -127,7 +140,7 @@ export default function AshHive() {
     address: hiveVaultAddress,
     abi: HiveVaultAbi,
     functionName: "stakeBee",
-    args: [5, 1],
+    args: [totalMinted, ashHive?.id],
   });
   const {
     write: stakeBee,
@@ -147,7 +160,7 @@ export default function AshHive() {
     address: hiveVaultAddress,
     abi: HiveVaultAbi,
     functionName: "unstakeBee",
-    args: [5],
+    args: [totalMinted],
   });
   const {
     write: unstakeBee,
@@ -178,15 +191,6 @@ export default function AshHive() {
     data: claimData,
   } = useContractWrite(claimConfig);
 
-  // Listen for approval status
-  useEffect(() => {
-    if ((approvedStatus as number) > 0) {
-      setIsApproved(true);
-    } else {
-      setIsApproved(false);
-    }
-  }, [approvedStatus]);
-
   // Overlay Visual properties
   const semiTransparentBackgroundStyles: CSSProperties = {
     position: "absolute",
@@ -202,6 +206,7 @@ export default function AshHive() {
 
   // Stake functionality if approved
   const handleStakeButtonClick = () => {
+    console.log(totalMinted);
     if (!isApproved) {
       console.log("approve all state");
       approveAll?.();
@@ -214,6 +219,10 @@ export default function AshHive() {
 
   // Unstake functionality
   const handleUnstakeButtonClick = () => {
+    if (totalSupplyData) {
+      console.log(totalSupplyData);
+      setTotalMinted(parseInt(totalSupplyData.toString()));
+    }
     unstakeBee?.();
     setLastAction("unstake");
   };
@@ -223,6 +232,22 @@ export default function AshHive() {
     claim?.();
     setLastAction("claim");
   };
+
+  // Listen for approval status
+  useEffect(() => {
+    if ((approvedStatus as number) > 0) {
+      setIsApproved(true);
+    } else {
+      setIsApproved(false);
+    }
+  }, [approvedStatus]);
+
+  useEffect(() => {
+    if (totalSupplyData) {
+      setTotalMinted(parseInt(totalSupplyData.toString()));
+    }
+  }, [totalMinted]);
+
 
   return (
     <Layout>
