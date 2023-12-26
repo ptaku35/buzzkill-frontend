@@ -15,13 +15,13 @@ import {
   useContractWrite,
   usePrepareContractWrite,
   useContractEvent,
+  useContractRead
 } from "wagmi";
 import { parseEther } from "viem";
 import BuzzkillNFT from "../../../src/assets/BuzzkillNFT.json";
-import React, { useState, useRef } from "react";
-import { ethers } from "ethers";
+import React, { useState, useRef, useEffect } from "react";
 import TomoScanLink from "Components/TomoScanLink";
-
+import BeeCard from "Components/BeeCard/BeeCard";
 
 
 // CONSTANT VARIABLES
@@ -38,22 +38,21 @@ const gatewayUrl = baseURI.replace("ipfs://", "https://ipfs.io/ipfs/");
 // Function for fetching NFT images to display after being minted
 async function fetchNFTMetadata(ipfsUrl: string) {
   const response = await fetch(ipfsUrl);
-  console.log(response);
   return await response.json();
 }
 
 export default function Mint() {
-  const tokenIdRef = useRef<`${string}` | undefined>();
   const [nftMetadata, setNftMetadata] = useState(null);
+  const [totalMinted, setTotalMinted] = useState(0);
 
   // Get sender's address
   const { address, isConnected } = useAccount();
 
-  // Prepare NFT contract
+  // Prepare Minting function
   const {
-    config,
+    config: mintToConfig,
     error: prepareError,
-    isError: isPreparError,
+    isError: isPreparError
   } = usePrepareContractWrite({
     address: stakingNFTAddress,
     abi: stakingNFTABI,
@@ -61,32 +60,25 @@ export default function Mint() {
     args: [address],
     value: mintCostInWei,
   });
-  // Prepare Minting function
   const {
     write: mintTo,
     isLoading: isProcessMinting,
     isSuccess: isMinted,
     isError: mintError,
     data: mintData,
-  } = useContractWrite(config);
+  } = useContractWrite(mintToConfig);
 
-  // Listen for events after minting
-  const contract = new ethers.Contract(
-    stakingNFTAddress,
-    stakingNFTABI,
-    ethers.getDefaultProvider()
-  );
-  useContractEvent({
+  // Prepare totalSupply function
+  const {
+    data: totalSupplyData,
+    isError: isTotalSupplyError,
+    isLoading: IsSupplyLoading
+  } = useContractRead({
     address: stakingNFTAddress,
     abi: stakingNFTABI,
-    eventName: "Transfer",
-    listener(log) {
-      // Decode the log using the contract interface
-      const decodedLog = contract.interface.parseLog(log[0]);
-      const { tokenId: newTokenId } = decodedLog.args;
-      tokenIdRef.current = newTokenId.toString();
-    },
-  });
+    functionName: "totalSupply",
+    watch: true,
+  })
 
   // Handle Mint button click
   const handleMintbuttonClick = () => {
@@ -103,7 +95,7 @@ export default function Mint() {
       duration: 5000,
       isClosable: true,
       render: () => (
-        <Box fontSize={50} color="white" p={50} bg="yellow.500">
+        <Box fontSize={50} color="white" p={5} bg="yellow.500">
           Mint Successful! buzz buzz!
         </Box>
       ),
@@ -126,21 +118,30 @@ export default function Mint() {
   };
 
   // When NFT is minted, metadata is loaded so the image can be displayed
-  React.useEffect(() => {
+  useEffect(() => {
     if (isMinted) {
       showSuccessfulToast?.();
-      // Load metadata from minted NFT
-      const loadMetadata = async () => {
-        const ipfsURI = gatewayUrl + tokenIdRef.current?.toString();
-        const metadata = await fetchNFTMetadata(ipfsURI);
-        console.log(metadata);
-        setNftMetadata(metadata);
-      };
-      loadMetadata();
     } else if (mintError) {
       showFailedToast?.();
     }
   }, [isMinted, mintError]);
+
+
+  // Update totalMinted state when totalSupplyData changes
+  useEffect(() => {
+    if (totalSupplyData && !isTotalSupplyError) {
+      setTotalMinted(parseInt(totalSupplyData.toString()));
+      
+      // Load metadata from minted NFT
+      const loadMetadata = async () => {
+        const tokenId = totalMinted + 1
+        const ipfsURI = gatewayUrl + tokenId;
+        const metadata = await fetchNFTMetadata(ipfsURI);
+        setNftMetadata(metadata);
+      };
+      loadMetadata();
+    }
+  }, [totalSupplyData, isTotalSupplyError]);
 
   // Update image URL from metadata
   let name, description, image, attributes;
@@ -171,17 +172,37 @@ export default function Mint() {
 
       {/* Minting Function */}
       <Container>
+          <Heading
+              color="yellow.400"
+              p="4"
+              bg="blackAlpha.600"
+              borderRadius="lg"
+              borderWidth="1px"
+              borderColor="yellow.400"
+              boxShadow="lg"
+              textAlign="center"
+              fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+              fontWeight="bold"
+              fontFamily="'Bangers', cursive;"
+              display="inline-flex" // Use inline-flex to make the box fit the content
+              alignItems="center" // Centers the items vertically
+              justifyContent="center" // Centers the items horizontally
+              mx="auto" // Adds automatic margins on the left and right to center the box in its parent
+              my={4} // Optional: Adds margin to the top and bottom for spacing
+              maxWidth="fit-content" //
+          >
+            Total NFTs Minted: {totalMinted}
+          </Heading>
         {/* Stack the components vertically */}
         <VStack
-          spacing={4} // space between children
+          spacing={10} // space between children
           align="stretch" // stretch children to fill the width
           borderRadius="md"
           padding="10rem 20rem 0rem 20rem"
         >
-          <Heading textColor="white" padding="0rem 5rem 3rem 5rem">
+          <Box textColor="white" padding="0rem 5rem 3rem 5rem" fontSize={40}>
             Mint Your NFT's here!
-          </Heading>
-
+          </Box>
           {/* Mint Button */}
           <Button
             alignSelf="center"
@@ -197,14 +218,14 @@ export default function Mint() {
               <Box style={{ color: "white", fontSize: "20px" }}>
                 Your NFT is here!
               </Box>
-              <Box>
+              <Box boxSize="40%">
                 {/* Conditional rendering of image */}
                 {nftMetadata && (
-                  <img
-                    src={image}
-                    alt="IPFS Image"
-                    style={{ width: "600px", height: "600px" }}
-                  />
+                  <BeeCard
+                    imagePath={image}
+                    
+                  >
+                  </BeeCard>
                 )}
               </Box>
             </VStack>
