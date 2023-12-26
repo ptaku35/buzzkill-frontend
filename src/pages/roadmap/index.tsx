@@ -17,10 +17,12 @@ export default function Roadmap() {
             position="relative"
             width="full"
             height="full" // Fixed height for the hero image container
-            overflow="hidden" // Ensure the overflowing parts of the image are not shown
+            display="flex" // Enable Flexbox
+            justifyContent="center" // Center content horizontally
+            alignItems="center" // Center content vertically
           >
             <Image
-              src="/roadmap/roadmap.svg"
+              src="/roadmap/Roadmap_design-02-01.svg"
               alt="Hero Image"
               borderRadius="0px"
               width="full"
